@@ -1,0 +1,47 @@
+.constructor {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: calc(100vh - 236px);
+
+  }
+  
+.burger_item {
+  overflow-y:auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.list li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.container {
+  margin-bottom: 52px;
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+}
+
+.currency {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.currency svg {
+  width: 32px;
+  height: 32px;
+}
