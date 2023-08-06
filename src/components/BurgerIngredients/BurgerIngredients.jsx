@@ -3,8 +3,8 @@ import styles from "./burger-ingredients.module.css";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredient from "./BurgerIngredient/BurgerIngredient";
 
-export default function BurgerIngredients(props){
-    const data = props.data;
+export default function BurgerIngredients({data, onIngredientClick}){
+  
 
     const [current, setCurrent] = React.useState('buns');
 
@@ -28,21 +28,21 @@ export default function BurgerIngredients(props){
     <ul className={`${styles.list} mb-10`}>
      {data.filter(item => item.type ==="bun").map((item)=>
      <li key = {item._id}>
-        <BurgerIngredient{...item}/>
+        <BurgerIngredient item={item} onClick={onIngredientClick}/>
      </li>)}
     </ul>
     <h2 className = "text text_type_main-medium mt-10 mb-6">Соусы</h2>
     <ul className={`${styles.list} mb-10`}>
      {data.filter(item => item.type ==="sauce").map((item)=>
      <li key = {item._id}>
-        <BurgerIngredient{...item}/>
+        <BurgerIngredient item={item} onClick={onIngredientClick}/>
      </li>)}
     </ul>
     <h2 className = "text text_type_main-medium mt-10 mb-6">Начинки</h2>
     <ul className={`${styles.list} mb-10`}>
      {data.filter(item => item.type ==="main").map((item)=>
      <li key = {item._id}>
-        <BurgerIngredient{...item}/>
+        <BurgerIngredient item={item} onClick={onIngredientClick}/>
      </li>)}
     </ul>
     </div>

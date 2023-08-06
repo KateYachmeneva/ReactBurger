@@ -4,18 +4,18 @@ import styles from "./burger-ingredient.module.css";
 import { Counter,CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 
-export default function BurgerIngredient(props){
+export default function BurgerIngredient({item,onClick}){
     
        return (
-        <article className={styles.ingredient}>
-           <img className="mb-1" src={props.image}/>
+        <article className={styles.ingredient} onClick={onClick}>
+           <img className="mb-1" src={item.image}/>
            <Counter className={styles.counter}  count={1} size="default" extraClass="m-1" />
            <div className={styles.price}>
            <p className="mb-1 text text_type_main-medium">
-            {props.price}</p>
+            {item.price}</p>
                   <CurrencyIcon type = "primary" />
                   </div>
-           <h3 className="text text_type_main-default">{props.name}</h3>
+           <h3 className="text text_type_main-default">{item.name}</h3>
         </article>
 
     )
