@@ -3,11 +3,12 @@
 }
 
 .main {
-  max-width: 1240px;
+  max-width: 1380px;
   align-items: start;
   width: 100%;
   display: flex;
   column-gap: 40px;
   max-height: calc(100vh - 250px);
   margin: 0 auto;
+
 }

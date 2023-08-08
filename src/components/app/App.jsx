@@ -3,7 +3,6 @@ import styles from "./app.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import * as api from '../../utils/api'
 
 
@@ -23,46 +22,16 @@ function App() {
    },[] );
 
   const { data, isLoading, hasError } = state;
- 
-  const [isModalOrderDetailsOpen, setModalOpen] = useState(false);
-
-  const [selectedIngredient, setSelectedIngredient] = useState({});
-
-  function closeAllModals() {
-    setModalOpen(false)
-    setSelectedIngredient({})
-  }
-
-  function handleOrderSubmit() {
-    setModalOpen(true)
-  };
-
-  function handleIngredientClick(ingridient) {
-    setSelectedIngredient(ingridient)
-  }
-
-
-  function closeAllModals() {
-    setModalOpen(false)
-    setSelectedIngredient({})
-  }
-  return (
+   return (
     <div>
-      |<AppHeader/>
+      <AppHeader/>
       {isLoading && 'Загрузка...'}
       {hasError && 'Произошла ошибка'}
-    <main className = {styles.main}>
+      <main className = {styles.main}>
       {!isLoading && !hasError}
-      <BurgerIngredients data = {data}
-                        onIngredientClick = {handleIngredientClick}
-      />
+      <BurgerIngredients data = {data}/>
       <BurgerConstructor data = {data}/>
       </main>
-      <IngredientDetails
-        isOpen={!!selectedIngredient.name}
-        ingridient={selectedIngredient}
-        onClose={closeAllModals}
-      />
       </div>
   );
 }

@@ -21,3 +21,9 @@
     position: relative;
     justify-self: stretch;;
   }
+  .ingredient {
+    list-style: none;
+    position: relative;
+    justify-self: stretch;
+    cursor: pointer;
+  }

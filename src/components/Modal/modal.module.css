@@ -21,9 +21,12 @@
   }
   
   .header__button {
+    background: none;
+    border: none;
     padding: 0;
-    border: 0;
-    background-color: transparent;
+    position: absolute;
+    right: 40px;
+    top: 60px;
     cursor: pointer;
   }
   
