@@ -14,9 +14,6 @@
   gap: 24px;
   list-style: none;
   }
-  .content {
-    overflow-y: scroll;
-  }
   .list li {
     position: relative;
     justify-self: stretch;;

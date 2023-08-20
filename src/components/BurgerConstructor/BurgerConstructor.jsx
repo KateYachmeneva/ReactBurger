@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import styles from "./burger-constructor.module.css";
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ingredientType } from "../../utils/types";
@@ -12,7 +12,21 @@ export default function BurgerConstructor(props){
     const [order, setOrder] = React.useState({ number: "034536" });
     
     const [isOrderOpen, setisOrderOpen] = useState(false);
-
+    console.log(props.data)
+    
+    const price = useMemo( ()  => {
+ 
+      return (
+        (
+         props.data.reduce((acc, item) =>  acc + item.price, 0) 
+        )
+      )
+    }
+       
+       
+       
+      ,[props.data]);
+console.log(price);
     function submitOrder () {
       setisOrderOpen(true);
       }
@@ -20,6 +34,8 @@ export default function BurgerConstructor(props){
     function closeModal () {
         setisOrderOpen(false);
         }
+    
+
     return (
       <>
         <section className={`${styles.constructor} pt-25 mb-10`}>
@@ -56,7 +72,7 @@ export default function BurgerConstructor(props){
         </div>
         <div className={`${styles.container} pr-4`}>
           <p className={`${styles.currency} mr-10 text text_type_digits-medium`}>
-            610
+         {price}
             <CurrencyIcon className={styles.container} style={{ width: "33px"}}/>
           </p>
           <Button htmlType="button" type="primary" size="large" onClick={submitOrder}>

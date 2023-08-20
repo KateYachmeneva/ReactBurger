@@ -7,7 +7,7 @@ const checkResponse = (res) => {
    return Promise.reject(`ошибка ${res.status}`)
 };
 
-export const getIngridients = () => {
+export const getIngridientsApi = () => {
    return fetch (`${API_URL}/ingredients`,{
       method: 'GET',
       headers: {
