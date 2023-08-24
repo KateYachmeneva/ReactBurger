@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch} from 'react-redux';
+import { useDispatch } from "react-redux";
 import styles from "./app.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
@@ -9,23 +9,22 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect (() => {
-    dispatch(getIngredients())
-    },[dispatch]);
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch]);
 
- 
-   return (
+  return (
     <div>
-      <AppHeader/>
-      <main className = {styles.main}>
-      <DndProvider backend={HTML5Backend}>
-         <BurgerIngredients/>
-         <BurgerConstructor/>
-      </DndProvider>
+      <AppHeader />
+      <main className={styles.main}>
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients />
+          <BurgerConstructor />
+        </DndProvider>
       </main>
-      </div>
+    </div>
   );
 }
 
