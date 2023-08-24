@@ -11,7 +11,7 @@ import { useDispatch,useSelector } from "react-redux";
 import { addconstrIngredients,setconstrBun } from "../../services/slices/constrIngredientsSlice";
 import { useDrop } from "react-dnd";
 
-export default function BurgerConstructor(props){
+export default function BurgerConstructor(){
     const dispatch = useDispatch();
     const {constructorIngredients} = useSelector((store) => store.constrIngredients);
     const {bun} = useSelector((store) => store.constrIngredients);
@@ -111,8 +111,3 @@ export default function BurgerConstructor(props){
       
     );
 }
-BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape(ingredientType)
-  )
-};

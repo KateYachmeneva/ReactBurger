@@ -1,20 +1,29 @@
 import { useState, useEffect} from 'react';
 import styles from "./burger-ingredients.module.css";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector } from 'react-redux';
 import BurgerIngredient from "./BurgerIngredient/BurgerIngredient";
 import { useInView } from "react-intersection-observer";
 import PropTypes from 'prop-types';
 import { ingredientType } from "../../utils/types";
+import Modal from "../Modal/Modal";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import {setSelectedIngredient } from "../../services/slices/ingredientsSlice";
 
-export default function BurgerIngredients({data}){
+export default function BurgerIngredients(){
+   
+  const dispatch = useDispatch();
   const [current, setCurrent] = useState("buns");
   const [bunsRef, bunsInView, bunsTab] = useInView({ threshold: 0 });
   const [saucesRef, saucesInView, saucesTab] = useInView({ threshold: 0 });
   const [mainsRef, mainsInView, mainsTab] = useInView({ threshold: 0 });
   const {constructorIngredients} = useSelector((store) => store.constrIngredients);
   const {bun}= useSelector((store) => store.constrIngredients);
-   
+  const {selectedIngredient} = useSelector((store) => store.ingredients);
+  const { data, isLoading, hasError } = useSelector((store) => store.ingredients);
+  function closeModal () {
+    dispatch(setSelectedIngredient())
+   }
   const onTabClick = (tabType, entry) => {
     setCurrent(tabType);
     entry.target.scrollIntoView({ behavior: "smooth" });
@@ -45,9 +54,10 @@ export default function BurgerIngredients({data}){
   };
 
     return (
+      <>
         <section  className = {styles.section_ingridients}>
             <h1 className = "text text_type_main-large mt-10 mb-5"> Соберите бургер</h1>
-            <div style={{ display: 'flex' }}>
+            <div className={`${styles.tabs} mb-10`}>
             <Tab
           value="buns"
           active={current === "buns"}
@@ -70,6 +80,9 @@ export default function BurgerIngredients({data}){
           Начинки
         </Tab>
     </div>
+    {isLoading && 'Загрузка...'}
+    {hasError && 'Произошла ошибка'}
+    {!isLoading && !hasError}
     <div className = {`${styles.content} custom-scroll`}>
     <h2 className = "text text_type_main-medium mt-10 mb-6" ref={bunsRef}>Булки</h2>
     <ul className={`${styles.list} mb-10`}>
@@ -94,10 +107,11 @@ export default function BurgerIngredients({data}){
     </ul>
     </div>
         </section>
-        );
-}
-BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape(ingredientType)
-  )
+           {selectedIngredient && (
+     <Modal onClose={closeModal} isOpen={!!selectedIngredient}>
+     <IngredientDetails ingridient={selectedIngredient}/>
+     </Modal>
+ )}
+ </>
+ )
 };

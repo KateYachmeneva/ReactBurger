@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import styles from "./app.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
@@ -15,17 +15,14 @@ function App() {
     dispatch(getIngredients())
     },[dispatch]);
 
-  const { data, isLoading, hasError } = useSelector((store) => store.ingredients);
+ 
    return (
     <div>
       <AppHeader/>
-      {isLoading && 'Загрузка...'}
-      {hasError && 'Произошла ошибка'}
       <main className = {styles.main}>
-      {!isLoading && !hasError}
       <DndProvider backend={HTML5Backend}>
-        <BurgerIngredients data = {data}/>
-        <BurgerConstructor data = {data}/>
+         <BurgerIngredients/>
+         <BurgerConstructor/>
       </DndProvider>
       </main>
       </div>

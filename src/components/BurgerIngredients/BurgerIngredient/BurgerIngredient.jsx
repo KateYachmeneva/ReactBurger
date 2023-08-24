@@ -1,24 +1,17 @@
 import React from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from "./burger-ingredient.module.css";
 import { Counter,CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ingredientType } from "../../../utils/types";
-import Modal from "../../Modal/Modal";
-import IngredientDetails from "../../IngredientDetails/IngredientDetails";
 import {setSelectedIngredient } from "../../../services/slices/ingredientsSlice";
 import { useDrag } from "react-dnd";
 
 export default function BurgerIngredient({item,count}){
  
   const dispatch = useDispatch();
-  const {selectedIngredient} = useSelector((store) => store.ingredients);
-   
-   
-  function closeModal () {
-     dispatch(setSelectedIngredient())
-    }
-   
+  
+  
   function handleClick() {
     dispatch(setSelectedIngredient(item))
     }
@@ -41,16 +34,10 @@ export default function BurgerIngredient({item,count}){
              </div>
       <h3 className="text text_type_main-default">{item.name}</h3>
      </article>
-   {selectedIngredient && (
-     <Modal onClose={closeModal} isOpen={!!selectedIngredient}>
-     <IngredientDetails ingridient={selectedIngredient}/>
-     </Modal>
- )}
-   </>
-   
-        
 
-    )
+   </>
+        
+   )
 }
 BurgerIngredient.propTypes = {
     item: PropTypes.shape(ingredientType),
