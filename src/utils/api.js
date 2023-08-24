@@ -7,13 +7,30 @@ const checkResponse = (res) => {
    return Promise.reject(`ошибка ${res.status}`)
 };
 
-export const getIngridients = () => {
-   return fetch (`${API_URL}/ingredients`,{
+function request(url, options) {
+   return fetch(url, options).then(checkResponse)
+ }
+
+export const getIngridientsApi = () => {
+   return request (`${API_URL}/ingredients`,{
       method: 'GET',
       headers: {
          'Accept': 'application/json',
          'Content-Type': 'application/json',
       }
    })
-   .then(checkResponse)
-};
+ };
+ 
+export const submitOrderApi = (ingredients) => {
+
+   return request(`${API_URL}/orders`, {
+     method: 'POST',
+     headers: {
+       'Accept': 'application/json',
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify({
+       ingredients: ingredients
+     })
+   })
+ }

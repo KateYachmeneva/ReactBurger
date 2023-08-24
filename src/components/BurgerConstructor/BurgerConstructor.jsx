@@ -1,72 +1,110 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import styles from "./burger-constructor.module.css";
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import ConstructorIngredient from "./ConstructorIngredient/ConstructorIngredient";
 import { ingredientType } from "../../utils/types";
 import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
+import {sendData} from "../../services/slices/orderDetailsSlice";
 import PropTypes from 'prop-types';
+import { useDispatch,useSelector } from "react-redux";
+import { addconstrIngredients,setconstrBun } from "../../services/slices/constrIngredientsSlice";
+import { useDrop } from "react-dnd";
 
 export default function BurgerConstructor(props){
-  
-    const img = "https://code.s3.yandex.net/react/code/bun-02.png";
-    const [order, setOrder] = React.useState({ number: "034536" });
+    const dispatch = useDispatch();
+    const {constructorIngredients} = useSelector((store) => store.constrIngredients);
+    const {bun} = useSelector((store) => store.constrIngredients);
+
     
     const [isOrderOpen, setisOrderOpen] = useState(false);
+        
+    const orderIngredients = () => {
+      const allIngredients = [
+        bun._id,
+        ...constructorIngredients.map(item => item._id),
+        bun._id
+      ]
+      return allIngredients
+    };
+    const price = useMemo( ()  => {
+      if( constructorIngredients  && bun) 
+      return (
+        (
+         constructorIngredients.reduce((acc, item) =>  acc + item.price, 0)+
+         bun.price * 2
+        )
+      )
+    }
+ , [constructorIngredients, bun]);
 
+   const [, dropTarget] = useDrop({
+     accept: "ingredients",
+     drop(ingredient) {
+       if (ingredient.type !== "bun") {
+         dispatch(addconstrIngredients(ingredient))
+       } else {
+         dispatch(setconstrBun(ingredient))
+       }
+     },
+    });
     function submitOrder () {
+      dispatch(sendData(orderIngredients()));
       setisOrderOpen(true);
       }
 
     function closeModal () {
         setisOrderOpen(false);
         }
+    
+
     return (
       <>
         <section className={`${styles.constructor} pt-25 mb-10`}>
-        <div className={`${styles.burger_item} mb-10`}>
-          <ConstructorElement
-           type="top"
-           isLocked={true}
-           text="Краторная булка N-200i (верх)"
-           price={200}
-           thumbnail={img}
-           extraClass="mr-5"
-          />
+        <div className={`${styles.burger_item} mb-10`} ref={dropTarget}>
+        {bun && <ConstructorElement
+            type="top"
+            isLocked={true}
+            text={`${bun.name} (верх)`}
+            price={bun.price}
+            thumbnail={bun.image}
+          />}
           
           <ul className={`${styles.list} mb-4 mt-4 pr-2 custom-scroll`}>
-            {props.data.map((item) => 
-              <li key={item._id} >
-                <DragIcon type="primary" />
-                <ConstructorElement
-                  text={item.name}
-                  price={item.price}
-                  thumbnail={item.image}
-                />
-              </li>
-            )}
+          {constructorIngredients.map((ingredient, index) => 
+               <ConstructorIngredient
+               ingredient={ingredient}
+               key={ingredient.uuid}
+               index={index}
+             />
+              )
+            }
           </ul>
-          <ConstructorElement
+          {constructorIngredients.length === 0 && !bun && 
+          <p className={`${styles.note} text text_type_main-medium`}>Перенесите ингдиенты в конструктор</p>
+          }
+          {bun && <ConstructorElement
             type="bottom"
             isLocked={true}
-            text="Краторная булка N-200i (низ)"
-            price={200}
-            thumbnail={img}
-            extraClass="mr-5"
-          />
-        </div>
+            text={`${bun.name} (низ)`}
+            price={bun.price}
+            thumbnail={bun.image}
+          />}
+       </div>
         <div className={`${styles.container} pr-4`}>
           <p className={`${styles.currency} mr-10 text text_type_digits-medium`}>
-            610
+         {price}
             <CurrencyIcon className={styles.container} style={{ width: "33px"}}/>
           </p>
-          <Button htmlType="button" type="primary" size="large" onClick={submitOrder}>
+          <Button disabled={constructorIngredients.length === 0 || !bun} htmlType="button" type="primary" size="large"  onClick={submitOrder}>
             Оформить заказ
           </Button>
+        
         </div>
       </section>
       {isOrderOpen && (
         <Modal onClose={closeModal} isOpen={isOrderOpen}>
-          <OrderDetails orderNumber={order.number} />
+          <OrderDetails />
         </Modal>
       )}
       </>
