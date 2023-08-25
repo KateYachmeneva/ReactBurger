@@ -3,6 +3,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  max-width:45%;
 }
 .content {
   overflow-y: scroll;
@@ -26,4 +27,9 @@
     position: relative;
     justify-self: stretch;
     cursor: pointer;
+  }
+  .tabs{
+    display:flex;
+    justify-content: center;
+    justify-self:stretch;
   }
