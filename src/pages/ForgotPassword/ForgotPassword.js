@@ -1,8 +1,10 @@
 import styles from './forgot-password.module.css';
-import AppHeader from "../../components/AppHeader/AppHeader";
 import Form from "../../components/form/form";
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
+import { useDispatch } from 'react-redux';
+import {forgotPassword } from "../../services/slices/userSlice"
 
 const links = [
     {
@@ -13,19 +15,25 @@ const links = [
   ];
 
 function ForgotPassword() {
-  const [emailValue,setEmailValue] = useState('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { values, handleChange } = useForm({
+    email: "",
+  });
 
-  const onEmailChange = e =>{
-    setEmailValue(e.target.value)
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+    console.log('f')
+    dispatch(forgotPassword(values))
+    navigate('/reset-password', { replace: true, state: {from: 'forgot-password'} });
   }
   return (
     <div className={`${styles.page} text text_type_main-default`}>
-    <AppHeader />
-    <main className={styles.content}>
-      <Form title="Восстановление пароля" buttonText="Восстановить" links={links}>
+      <main className={styles.content}>
+      <Form title="Восстановление пароля" buttonText="Восстановить" links={links} onFormSubmit = {handleForgotPassword}>
         <EmailInput
-          onChange={onEmailChange}
-          value={emailValue}
+          onChange={handleChange}
+          value={values.email}
           name={'email'}
           isIcon={false}
           extraClass="mb-6"

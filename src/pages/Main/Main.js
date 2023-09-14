@@ -8,8 +8,7 @@ import BurgerIngredients from "../../components/BurgerIngredients/BurgerIngredie
 function Main() {
     return (
       <div className="page text text_type_main-default">
-        <AppHeader />
-        <main className={styles.main}>
+           <main className={styles.main}>
           <DndProvider backend={HTML5Backend}>
             <BurgerIngredients/>
             <BurgerConstructor/>

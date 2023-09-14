@@ -1,0 +1,14 @@
+.content {
+    max-width: 1280px;
+    margin-right: auto;
+    margin-left: auto;
+    display: grid;
+    grid-template-columns: 320px auto;
+    gap: 60px;
+  }
+  
+  .buttons {
+    max-width: 480px;
+    display: flex;
+    justify-content: flex-end;
+  }

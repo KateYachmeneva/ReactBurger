@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styles from './login.module.css';
-import AppHeader from "../../components/AppHeader/AppHeader";
 import { EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import Form from "../../components/form/form";
+import { useDispatch } from 'react-redux';
+import { logIn } from "../../services/slices/loginSlice";
+import { useForm } from "../../hooks/useForm";
 
 const links = [
     {
@@ -18,31 +20,34 @@ const links = [
   ];
   
 function Login() {
-    const [emailValue, setEmailInputValue] = useState('');
-    const [passwordValue, setPasswordInputValue] = useState('')
+    const dispatch = useDispatch();
+    const { values, handleChange} = useForm({
+        email: "",
+        password: ""
+      });
 
-    const onEmailChange = e =>{
-        setEmailInputValue(e.target.value)
-    }
 
-    const onPasswordChange = e => {
-        setPasswordInputValue(e.target.value)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+            dispatch(logIn({
+      "email": values.email,
+      "password": values.password
+        }));
     }
     return (
         <div className={`${styles.page} text text_type_main-default`}>
-          <AppHeader />
-          <main className={styles.content}>
-            <Form title="Вход" buttonText="Войти" links={links}>
+             <main className={styles.content}>
+            <Form title="Вход" buttonText="Войти" links={links}  onFormSubmit={handleSubmit}>
               <EmailInput
-                onChange={onEmailChange}
-                value={emailValue}
+                onChange={handleChange}
+                value={values.email}
                 name={'email'}
                 isIcon={false}
                 extraClass="mb-6"
               />
               <PasswordInput
-                onChange={onPasswordChange}
-                value={passwordValue}
+                onChange={handleChange}
+                value={values.password}
                 name={'password'}
                 extraClass="mb-6"
               />

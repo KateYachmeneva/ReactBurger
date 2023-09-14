@@ -1,7 +1,10 @@
 import styles from "./ingredient-details.module.css";
 import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 
 export default function IngredientDetails(props) {
+  console.log(props)
+  let { id } = useParams();
   return (
     <div className={styles.container}>
       <h2 className={`${styles.title} text text_type_main-large mt-2`}>

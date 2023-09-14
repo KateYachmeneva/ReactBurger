@@ -1,8 +1,12 @@
 import { useState } from "react";
 import styles from './register.module.css';
-import AppHeader from "../../components/AppHeader/AppHeader";
 import { Input, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import Form from "../../components/form/form";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
+import { toaster } from "evergreen-ui"
+import { registerUser } from "../../services/slices/registerSlice"
 
 const links = [
     {
@@ -13,31 +17,43 @@ const links = [
   ];
 
 function Register() {
-    const [nameValue, setNameValue] = useState('')
-    const [emailValue, setEmailValue] = useState('');
-    const [passwordValue, setPasswordValue] = useState('')
 
-    const onEmailChange = e => {
-        setEmailValue(e.target.value)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const checkSignUpValidity = ()=> {
+        return (
+          !!values.name &&
+          !!values.email &&
+          !!values.password
+         )
       }
-    
-      const onPasswordChange = e => {
-        setPasswordValue(e.target.value)
-      }
-    
-      const onNameChange = e => {
-        setNameValue(e.target.value)
-      }
+    const { values, handleChange} = useForm({
+        email: "",
+        password: "",
+        name: ""
+      });
+
+  
+      
+  const handleRegister = (e) => { // Обработчик сабмита формы
+    e.preventDefault()
+    if (checkSignUpValidity()) {
+      dispatch(registerUser(values))
+      navigate("/login")
+    } else {
+      toaster.notify("Нужно заполнить все данные")
+    }
+  }
     return (
     <div className={`${styles.page} text text_type_main-default`}>
-      <AppHeader />
-      <main className={styles.content}>
-        <Form title="Регистрация" buttonText="Зарегистрироваться" links={links}>
+         <main className={styles.content}>
+        <Form title="Регистрация" buttonText="Зарегистрироваться" links={links} onFormSubmit={handleRegister} >
           <Input
             type={'text'}
             placeholder={'Имя'}
-            onChange={onNameChange}
-            value={nameValue}
+            onChange={handleChange}
+            value={values.name}
             name={'name'}
             error={false}
             errorText={'Ошибка'}
@@ -45,15 +61,15 @@ function Register() {
             extraClass="mb-6"
           />
           <EmailInput
-            onChange={onEmailChange}
-            value={emailValue}
+            onChange={handleChange}
+            value={values.email}
             name={'email'}
             isIcon={false}
             extraClass="mb-6"
           />
           <PasswordInput
-            onChange={onPasswordChange}
-            value={passwordValue}
+            onChange={handleChange}
+            value={values.password}
             name={'password'}
             extraClass="mb-6"
           />

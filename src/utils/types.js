@@ -13,3 +13,8 @@ export const ingredientType = {
   proteins: PropTypes.number,
   type: PropTypes.string,
 };
+export const linkType = PropTypes.shape({
+  title: PropTypes.string,
+  linkName: PropTypes.string,
+  path: PropTypes.string,
+})

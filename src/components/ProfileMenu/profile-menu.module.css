@@ -1,0 +1,12 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .link {
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    align-self: baseline;
+  }
