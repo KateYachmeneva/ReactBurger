@@ -17,4 +17,4 @@ export const linkType = PropTypes.shape({
   title: PropTypes.string,
   linkName: PropTypes.string,
   path: PropTypes.string,
-})
+});

@@ -6,17 +6,16 @@ import BurgerConstructor from "../../components/BurgerConstructor/BurgerConstruc
 import BurgerIngredients from "../../components/BurgerIngredients/BurgerIngredients";
 
 function Main() {
-    return (
-      <div className="page text text_type_main-default">
-           <main className={styles.main}>
-          <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients/>
-            <BurgerConstructor/>
-          </DndProvider>
-        </main>
-      </div>
-    );
-  }
-  
-  export default Main;
+  return (
+    <div className="page text text_type_main-default">
+      <main className={styles.main}>
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients />
+          <BurgerConstructor />
+        </DndProvider>
+      </main>
+    </div>
+  );
+}
 
+export default Main;

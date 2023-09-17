@@ -6,6 +6,7 @@ import Main from "../../pages/Main/Main";
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
 import Profile from "../../pages/Profile/Profile";
+import NotFound404 from "../../pages/NotFound404/NotFound404";
 import ForgotPassword from "../../pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "../../pages/ResetPassword/ResetPassword";
 import Orders from "../../pages/Orders/Orders";
@@ -31,7 +32,7 @@ function App() {
   useEffect(() => {
     dispatch(getIngredients());
     dispatch(checkUserAuth())
-  }, [dispatch]);
+  }, []);
 
 
   return (
@@ -81,11 +82,12 @@ function App() {
             </ProtectedRoute>
           }
        />
-           <Route path={'/ingredients/:id'} element={<IngredientPage/>}/>
+           <Route path={'/ingredients/:ingredientId'} element={<IngredientPage/>}/>
+           <Route path="*" element={<NotFound404 />} />
     </Routes>
     {background && (
         <Routes>
-          <Route path={'/ingredients/:id'} element={
+          <Route path={'/ingredients/:ingredientId'} element={
             <Modal onClose={closeModal}>
               <IngredientDetails/>
             </Modal>

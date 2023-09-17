@@ -1,4 +1,4 @@
-import { getCookie } from "../utils/cookie"
+import { getCookie } from "../utils/cookie";
 
 const API_URL = "https://norma.nomoreparties.space/api";
 
@@ -36,108 +36,103 @@ export const submitOrderApi = (ingredients) => {
   });
 };
 
+//auth
 
-//auth 
-
-
-export const updateToken = (token) => {
- return request(`${API_URL}/auth/token`, {
-    method: 'POST',
+export const updateTokenApi = (token) => {
+  return request(`${API_URL}/auth/token`, {
+    method: "POST",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({"token": token})
+    body: JSON.stringify({ token: token }),
   });
 };
 
 export const getUserDataApi = () => {
- return request(`${API_URL}/auth/user`, {
-  method: 'GET',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    Authorization: "Bearer " + getCookie("authToken"),
-  },
- });
-};
-
-export const updateUserDataApi = (token, data) => {
-
-return request (`${API_URL}/auth/user`, {
-    method: 'PATCH',
+  return request(`${API_URL}/auth/user`, {
+    method: "GET",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getCookie("authToken"),
     },
-    body: JSON.stringify(data)
   });
 };
 
-export const registerUserRequestApi  = (data) => {
-  return request (`${API_URL}/auth/register`, {
-    method: 'POST',
+export const updateUserDataApi = (token, data) => {
+  return request(`${API_URL}/auth/user`, {
+    method: "PATCH",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
+  });
+};
+
+export const registerUserRequestApi = (data) => {
+  return request(`${API_URL}/auth/register`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   });
 };
 
 export const loginUserDataApi = ({ email, password }) => {
   return request(`${API_URL}/auth/login`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password })
+    body: JSON.stringify({ email, password }),
   });
 };
 export const logOut = (token) => {
   return request(`${API_URL}/auth/logout`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({"token": token})
+    body: JSON.stringify({ token: token }),
   });
-}
+};
 
 export const forgotPasswordApi = (email) => {
   return request(`${API_URL}/password-reset`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(email)
+    body: JSON.stringify(email),
   });
- };
+};
 
 export const resetPasswordApi = (data) => {
-
   return request(`${API_URL}/password-reset/reset`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 };
 
 export const logoutApi = (token) => {
-
   return request(`${API_URL}/auth/logout`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({"token": token})
+    body: JSON.stringify({ token: token }),
   });
 };

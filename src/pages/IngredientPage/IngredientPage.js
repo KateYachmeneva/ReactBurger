@@ -1,11 +1,11 @@
 import IngredientDetails from "../../components/IngredientDetails/IngredientDetails";
 
-function IngredientPage () {
+function IngredientPage() {
   return (
     <main className="mt-20">
       <IngredientDetails />
     </main>
-  )
+  );
 }
 
 export default IngredientPage;

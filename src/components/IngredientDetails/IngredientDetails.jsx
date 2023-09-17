@@ -1,18 +1,33 @@
 import styles from "./ingredient-details.module.css";
-import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
+import {  useSelector } from "react-redux";
+import Preloader from "../preloader/preloader";
 
-export default function IngredientDetails(props) {
-  console.log(props)
-  let { id } = useParams();
+
+export default function IngredientDetails() {
+  const { data } = useSelector(
+    (store) => store.ingredients,
+  );
+  console.log(data)
+  let {ingredientId } = useParams();
+ console.log(ingredientId)
+
+
+  const ingredient = data.find(ingredient => ingredient._id === ingredientId);
+
+  console.log(data.length)
+  console.log(ingredient)
+  if (!ingredient) {
+        return (<Preloader />)
+  } 
   return (
     <div className={styles.container}>
       <h2 className={`${styles.title} text text_type_main-large mt-2`}>
         Детали ингредиента
       </h2>
-      <img src={props.ingridient.image_large} alt={props.ingridient.name} />
+      <img src={ingredient.image_large} alt={ingredient.name} />
       <p className="mt-4 mb-8 text text_type_main-medium">
-        {props.ingridient.name}
+        {ingredient.name}
       </p>
       <ul
         className={`${styles.table} text text_type_main-default text_color_inactive`}
@@ -20,45 +35,28 @@ export default function IngredientDetails(props) {
         <li className={styles.tableItem}>
           <h3 className="text text_type_main-default mb-2">Калории,ккал</h3>
           <p className="text text_type_digits-default">
-            {props.ingridient.calories}
+            {ingredient.calories}
           </p>
         </li>
         <li className={styles.tableItem}>
           <h3 className="text text_type_main-default mb-2">Белки, г</h3>
           <p className="text text_type_digits-default">
-            {props.ingridient.proteins}
+            {ingredient.proteins}
           </p>
         </li>
         <li className={styles.tableItem}>
           <h3 className="text text_type_main-default mb-2">Жиры, г</h3>
           <p className="text text_type_digits-default">
-            {props.ingridient.calories}
+            {ingredient.calories}
           </p>
         </li>
         <li className={styles.tableItem}>
           <h3 className="text text_type_main-default mb-2">Углеводы, г</h3>
           <p className="text text_type_digits-default">
-            {props.ingridient.carbohydrates}
+            {ingredient.carbohydrates}
           </p>
         </li>
       </ul>
     </div>
   );
 }
-IngredientDetails.propTypes = {
-  ingridient: PropTypes.shape({
-    id: PropTypes.string,
-    calories: PropTypes.number,
-    carbohydrates: PropTypes.number,
-    fat: PropTypes.number,
-    image: PropTypes.string,
-    image_large: PropTypes.string,
-    image_mobile: PropTypes.string,
-    name: PropTypes.string,
-    price: PropTypes.number,
-    proteins: PropTypes.number,
-    type: PropTypes.string,
-  }),
-  isOpen: PropTypes.bool,
-  onClose: PropTypes.func,
-};

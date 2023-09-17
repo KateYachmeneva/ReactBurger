@@ -1,12 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
 function Orders(props) {
-  return (
-    <div>Orders</div>
-  )
+  return <div>Orders</div>;
 }
 
-Orders.propTypes = {}
+Orders.propTypes = {};
 
-export default Orders
+export default Orders;
