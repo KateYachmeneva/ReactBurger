@@ -4,9 +4,7 @@ import PropTypes from "prop-types";
 
 export function ProtectedRoute({ onlyUnAuth, children }) {
   const { authChecked } = useSelector((store) => store.auth);
-  console.log(authChecked);
   const { user } = useSelector((store) => store.userData);
-  console.log(user);
   const location = useLocation();
   const myState = location.state;
 

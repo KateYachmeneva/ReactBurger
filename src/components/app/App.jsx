@@ -1,6 +1,12 @@
-import { Routes, Route,useLocation,useNavigate, Router  } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  Router,
+} from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { getIngredients } from "../../services/slices/ingredientsSlice";
 import Main from "../../pages/Main/Main";
 import Login from "../../pages/Login/Login";
@@ -25,23 +31,21 @@ function App() {
 
   const background = location.state && location.state.background;
 
-
   const closeModal = () => {
-    navigate(-1)
-  }
+    navigate(-1);
+  };
   useEffect(() => {
     dispatch(getIngredients());
-    dispatch(checkUserAuth())
+    dispatch(checkUserAuth());
   }, []);
-
 
   return (
     <div className={`${styles.page} text text_type_main-default`}>
-     <AppHeader />
-    <Routes  location={background || location}>
-    <Route path="/" element={<Main />}/>
-    <Route path="/orders" element={<Orders />}/>
-    <Route
+      <AppHeader />
+      <Routes location={background || location}>
+        <Route path="/" element={<Main />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route
           path="/login"
           element={
             <ProtectedRoute onlyUnAuth={true}>
@@ -50,14 +54,14 @@ function App() {
           }
         />
 
-       <Route
+        <Route
           path="/register"
           element={
             <ProtectedRoute onlyUnAuth={true}>
               <Register />
             </ProtectedRoute>
           }
-       />
+        />
         <Route
           path="/forgot-password"
           element={
@@ -65,7 +69,7 @@ function App() {
               <ForgotPassword />
             </ProtectedRoute>
           }
-       />
+        />
         <Route
           path="/profile"
           element={
@@ -73,29 +77,35 @@ function App() {
               <Profile />
             </ProtectedRoute>
           }
-       />
-       <Route
+        />
+        <Route
           path="/reset-password"
           element={
             <ProtectedRoute onlyUnAuth={true}>
               <ResetPassword />
             </ProtectedRoute>
           }
-       />
-           <Route path={'/ingredients/:ingredientId'} element={<IngredientPage/>}/>
-           <Route path="*" element={<NotFound404 />} />
-    </Routes>
-    {background && (
+        />
+        <Route
+          path={"/ingredients/:ingredientId"}
+          element={<IngredientPage />}
+        />
+        <Route path="*" element={<NotFound404 />} />
+      </Routes>
+      {background && (
         <Routes>
-          <Route path={'/ingredients/:ingredientId'} element={
-            <Modal onClose={closeModal}>
-              <IngredientDetails/>
-            </Modal>
-          }/>
+          <Route
+            path={"/ingredients/:ingredientId"}
+            element={
+              <Modal onClose={closeModal}>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
         </Routes>
       )}
-       </div>
-  )
+    </div>
+  );
 }
 
 export default App;

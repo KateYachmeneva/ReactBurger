@@ -15,7 +15,6 @@ import { objectsComparison } from "../../utils/utils";
 function Profile(props) {
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.userData);
-  console.log(user);
   const { values, handleChange, setValues } = useForm({
     email: user.email ?? "",
     name: user.name ?? "",

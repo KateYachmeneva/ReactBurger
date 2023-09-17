@@ -19,10 +19,9 @@ import {
 import { useDrop } from "react-dnd";
 
 export default function BurgerConstructor() {
-  const {user} = useSelector((store) => store.userData);
-  console.log(user.name)
+  const { user } = useSelector((store) => store.userData);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { constructorIngredients } = useSelector(
     (store) => store.constrIngredients,
   );
@@ -57,11 +56,11 @@ export default function BurgerConstructor() {
     },
   });
   function submitOrder() {
-    if(user.name){
-    dispatch(sendData(orderIngredients()));
-    setisOrderOpen(true);
-    }else{
-      navigate("/login")
+    if (user.name) {
+      dispatch(sendData(orderIngredients()));
+      setisOrderOpen(true);
+    } else {
+      navigate("/login");
     }
   }
 

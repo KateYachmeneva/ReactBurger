@@ -14,7 +14,7 @@ import { Link, useLocation } from "react-router-dom";
 export default function BurgerIngredient({ item, count }) {
   const dispatch = useDispatch();
   const location = useLocation();
-  const ingredientId = item['_id']
+  const ingredientId = item["_id"];
   function handleClick() {
     dispatch(setSelectedIngredient(item));
   }
@@ -25,12 +25,11 @@ export default function BurgerIngredient({ item, count }) {
   });
 
   return (
-    
-      <Link
-      key ={ingredientId}
+    <Link
+      key={ingredientId}
       className={`${styles.link} text_color_primary`}
       to={`/ingredients/${ingredientId}`}
-      state={{background: location}}
+      state={{ background: location }}
     >
       {count !== 0 ? (
         <Counter
@@ -54,8 +53,7 @@ export default function BurgerIngredient({ item, count }) {
         </div>
         <h3 className="text text_type_main-default">{item.name}</h3>
       </article>
-      </Link>
-  
+    </Link>
   );
 }
 BurgerIngredient.propTypes = {

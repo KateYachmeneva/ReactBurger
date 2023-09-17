@@ -13,11 +13,13 @@ export default function AppHeader() {
     <header className={styles.header}>
       <div className={`${styles.header_container} pb-4 pt-4`}>
         <nav className={styles.header_nav}>
-        <NavLink
-          className={({ isActive }) =>
-            `${styles.link} p-5 mr-2 ${isActive ? `text_color_primary` : `text_color_inactive`}`
-          }
-          to="/"
+          <NavLink
+            className={({ isActive }) =>
+              `${styles.link} p-5 mr-2 ${
+                isActive ? `text_color_primary` : `text_color_inactive`
+              }`
+            }
+            to="/"
           >
             {({ isActive }) => (
               <>
@@ -28,13 +30,18 @@ export default function AppHeader() {
           </NavLink>
           <NavLink
             className={({ isActive }) =>
-              `${styles.link} p-5 mr-2 ${isActive ? `text_color_primary` : `text_color_inactive`}`
+              `${styles.link} p-5 mr-2 ${
+                isActive ? `text_color_primary` : `text_color_inactive`
+              }`
             }
-            to="/orders">
+            to="/orders"
+          >
             {({ isActive }) => (
               <>
                 <ListIcon type={isActive ? "primary" : "secondary"} />
-                <p className="text text_type_main-default ml-2">Лента заказов</p>
+                <p className="text text_type_main-default ml-2">
+                  Лента заказов
+                </p>
               </>
             )}
           </NavLink>
@@ -44,9 +51,12 @@ export default function AppHeader() {
         </Link>
         <NavLink
           className={({ isActive }) =>
-            `${styles.link} p-5 mr-2 ${isActive ? `text_color_primary` : `text_color_inactive`}`
-            }
-          to="/profile">
+            `${styles.link} p-5 mr-2 ${
+              isActive ? `text_color_primary` : `text_color_inactive`
+            }`
+          }
+          to="/profile"
+        >
           {({ isActive }) => (
             <>
               <ProfileIcon type={isActive ? "primary" : "secondary"} />

@@ -22,6 +22,16 @@ export const getUserInfo = createAsyncThunk(
     }
   },
 );
+export const checkUserAuth = () => async (dispatch) => {
+  if (getCookie("authToken")) {
+    try {
+      await dispatch(getUserInfo());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  dispatch(authChecked());
+};
 export const refreshToken = createAsyncThunk(
   "userInfo/refreshToken",
   async (_, { dispatch }) => {
@@ -71,15 +81,5 @@ export const getUserDataSlice = createSlice({
   },
 });
 
-export const checkUserAuth = () => async (dispatch) => {
-  if (getCookie("authToken")) {
-    try {
-      await dispatch(getUserInfo());
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  dispatch(authChecked());
-};
 export default getUserDataSlice.reducer;
 export const { authChecked } = getUserDataSlice.actions;
