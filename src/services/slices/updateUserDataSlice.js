@@ -8,19 +8,15 @@ export const initialState = {
   updateUserDataSuccess: false,
   updateUserDataError: false,
   authChecked: false,
+  error: null,
 };
 export const updateUserInfo = createAsyncThunk(
   "userInfo/getUserInfo",
   async (data, { dispatch }) => {
-    console.log(data);
-    try {
-      const response = await updateUserDataApi(getCookie("authToken"), data);
-      dispatch(setUserData(response));
+    const response = await updateUserDataApi(getCookie("authToken"), data);
+    dispatch(setUserData(response));
 
-      return response;
-    } catch (error) {
-      throw error;
-    }
+    return response;
   },
 );
 
@@ -37,16 +33,19 @@ export const updateUserDataSlice = createSlice({
       state.updateUserDataRequest = true;
       state.updateUserDataSuccess = false;
       state.updateUserDataError = false;
+      state.error = null;
     });
     builder.addCase(updateUserInfo.fulfilled, (state) => {
       state.updateUserDataRequest = false;
       state.updateUserDataSuccess = true;
       state.updateUserDataError = false;
+      state.error = null;
     });
-    builder.addCase(updateUserInfo.rejected, (state) => {
+    builder.addCase(updateUserInfo.rejected, (state, action) => {
       state.updateUserDataRequest = false;
       state.updateUserDataSuccess = false;
       state.updatetUserDataError = true;
+      state.error = action.payload;
     });
   },
 });

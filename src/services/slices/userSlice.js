@@ -31,27 +31,17 @@ export const userSlice = createSlice({
 
 export const forgotPassword = createAsyncThunk(
   "user/forgotPassword",
-  async (email, { rejectWithValue }) => {
-    try {
-      const response = await forgotPasswordApi(email);
+  async (email) => {
+    const response = await forgotPasswordApi(email);
 
-      return response;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
+    return response;
   },
 );
 export const resetPassword = createAsyncThunk(
   "user/resetPassword",
-  async (data, { rejectWithValue }) => {
-    try {
-      const response = await resetPasswordApi(data);
-      // dispatch(setUserData(response))
-
-      return response;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
+  async (data) => {
+    const response = await resetPasswordApi(data);
+    return response;
   },
 );
 

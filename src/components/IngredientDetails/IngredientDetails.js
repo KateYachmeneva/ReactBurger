@@ -1,21 +1,16 @@
 import styles from "./ingredient-details.module.css";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import Preloader from "../preloader/preloader";
-import { getIngredients } from "../../services/slices/ingredientsSlice";
+
 
 export default function IngredientDetails() {
-  const dispatch = useDispatch();
+
   const { data, isLoading } = useSelector((store) => store.ingredients);
 
-  useEffect(() => {
-    if (data.length === 0) {
-      dispatch(getIngredients());
-    }
-  }, [dispatch]);
-
   let { ingredientId } = useParams();
+
   if (isLoading) {
     // Показываем Preloader во время загрузки данных
     return <Preloader />;

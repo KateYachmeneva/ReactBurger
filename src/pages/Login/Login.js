@@ -4,7 +4,7 @@ import {
   EmailInput,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import Form from "../../components/form/form";
+import Form from "../../components/Form/Form";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../services/slices/loginSlice";
 import { useForm } from "../../hooks/useForm";

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { linkType } from "../../utils/types";
 
-function form({ children, title, buttonText, links, onFormSubmit }) {
+function Form({ children, title, buttonText, links, onFormSubmit }) {
   return (
     <form className={styles.form} onSubmit={onFormSubmit}>
       <h1 className="text text_type_main-medium mb-6">{title}</h1>
@@ -23,7 +23,7 @@ function form({ children, title, buttonText, links, onFormSubmit }) {
     </form>
   );
 }
-form.propTypes = {
+Form.propTypes = {
   title: PropTypes.string,
   buttonText: PropTypes.string,
   onFormSubmit: PropTypes.func,
@@ -31,4 +31,4 @@ form.propTypes = {
   children: PropTypes.node,
 };
 
-export default form;
+export default Form;

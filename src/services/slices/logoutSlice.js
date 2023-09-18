@@ -10,21 +10,18 @@ const initialState = {
   logoutRequest: false,
   logoutSuccess: false,
   logoutError: false,
+  error: null,
 };
 
 export const logout = createAsyncThunk(
   "user/resetPassword",
-  async (_, { dispatch, rejectWithValue }) => {
-    try {
-      const refreshToken = getCookie("refreshToken");
-      const response = await logoutApi(refreshToken);
-      deleteCookie("authToken");
-      deleteCookie("refreshToken");
-      dispatch(logoutUser());
-      return response;
-    } catch (error) {
-      throw error;
-    }
+  async (_, { dispatch }) => {
+    const refreshToken = getCookie("refreshToken");
+    const response = await logoutApi(refreshToken);
+    deleteCookie("authToken");
+    deleteCookie("refreshToken");
+    dispatch(logoutUser());
+    return response;
   },
 );
 
@@ -37,16 +34,19 @@ export const logoutSlice = createSlice({
       state.logoutRequest = true;
       state.logoutSuccess = false;
       state.logoutError = false;
+      state.error = null;
     });
     builder.addCase(logout.fulfilled, (state) => {
       state.logoutRequest = false;
       state.logoutSuccess = true;
       state.logoutError = false;
+      state.error = null;
     });
-    builder.addCase(logout.rejected, (state) => {
+    builder.addCase(logout.rejected, (state, action) => {
       state.logoutRequest = false;
       state.loginSuccess = false;
       state.loginError = true;
+      state.error = action.payload;
     });
   },
 });

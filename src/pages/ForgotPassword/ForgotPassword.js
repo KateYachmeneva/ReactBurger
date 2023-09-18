@@ -1,5 +1,5 @@
 import styles from "./forgot-password.module.css";
-import Form from "../../components/form/form";
+import Form from "../../components/Form/Form";
 import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";

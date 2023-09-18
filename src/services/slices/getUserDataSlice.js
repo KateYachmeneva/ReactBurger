@@ -8,27 +8,21 @@ export const initialState = {
   getUserDataSuccess: false,
   getUserDataError: false,
   authChecked: false,
+  error: null,
 };
 export const getUserInfo = createAsyncThunk(
   "userInfo/getUserInfo",
   async (_, { dispatch }) => {
-    try {
-      const response = await getUserDataApi();
-      dispatch(setUserData(response));
-
-      return response;
-    } catch (error) {
-      throw error;
-    }
+    const response = await getUserDataApi();
+    dispatch(setUserData(response));
+    return response;
   },
 );
 export const checkUserAuth = () => async (dispatch) => {
   if (getCookie("authToken")) {
     try {
       await dispatch(getUserInfo());
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }
   dispatch(authChecked());
 };
@@ -67,16 +61,22 @@ export const getUserDataSlice = createSlice({
       state.getUserDataRequest = true;
       state.getUserDataSuccess = false;
       state.getUserDataError = false;
+      state.error = null;
     });
     builder.addCase(getUserInfo.fulfilled, (state) => {
       state.getUserDataRequest = false;
       state.getUserDataSuccess = true;
       state.getUserDataError = false;
+      state.error = null;
     });
-    builder.addCase(getUserInfo.rejected, (state) => {
+    builder.addCase(getUserInfo.rejected, (state, action) => {
       state.getUserDataRequest = false;
       state.getUserDataSuccess = false;
       state.getUserDataError = true;
+      state.error = action.payload;
+    });
+    builder.addCase(refreshToken.rejected, (state, action) => {
+      state.error = action.payload;
     });
   },
 });

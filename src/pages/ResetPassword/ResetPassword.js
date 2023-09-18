@@ -1,6 +1,6 @@
 import styles from "./resetpassword.module.css";
 import AppHeader from "../../components/AppHeader/AppHeader";
-import Form from "../../components/form/form";
+import Form from "../../components/Form/Form";
 import {
   PasswordInput,
   Input,

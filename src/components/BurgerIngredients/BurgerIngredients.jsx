@@ -4,8 +4,6 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
 import BurgerIngredient from "./BurgerIngredient/BurgerIngredient";
 import { useInView } from "react-intersection-observer";
-import Modal from "../Modal/Modal";
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { setSelectedIngredient } from "../../services/slices/ingredientsSlice";
 
 export default function BurgerIngredients() {
@@ -18,13 +16,10 @@ export default function BurgerIngredients() {
     (store) => store.constrIngredients,
   );
   const { bun } = useSelector((store) => store.constrIngredients);
-  const { selectedIngredient } = useSelector((store) => store.ingredients);
   const { data, isLoading, hasError } = useSelector(
     (store) => store.ingredients,
   );
-  function closeModal() {
-    dispatch(setSelectedIngredient());
-  }
+  
   const onTabClick = (tabType, entry) => {
     setCurrent(tabType);
     entry.target.scrollIntoView({ behavior: "smooth" });

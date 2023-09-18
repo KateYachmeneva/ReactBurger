@@ -7,23 +7,20 @@ const initialState = {
   loginRequest: false,
   loginSuccess: false,
   loginError: false,
+  error: null,
 };
 
 export const logIn = createAsyncThunk(
   "login/user",
   async ({ email, password }, { dispatch }) => {
-    try {
-      const response = await loginUserDataApi({ email, password });
-      const authToken = response.accessToken.split("Bearer ")[1];
-      const refreshToken = response.refreshToken;
-      setCookie("authToken", authToken);
-      setCookie("refreshToken", refreshToken);
-      localStorage.setItem("refreshToken", refreshToken);
-      dispatch(setUserData(response));
-      return response;
-    } catch (error) {
-      throw error;
-    }
+    const response = await loginUserDataApi({ email, password });
+    const authToken = response.accessToken.split("Bearer ")[1];
+    const refreshToken = response.refreshToken;
+    setCookie("authToken", authToken);
+    setCookie("refreshToken", refreshToken);
+    localStorage.setItem("refreshToken", refreshToken);
+    dispatch(setUserData(response));
+    return response;
   },
 );
 
@@ -36,16 +33,20 @@ export const loginSlice = createSlice({
       state.loginRequest = true;
       state.loginSuccess = false;
       state.loginError = false;
+      state.error = null;
     });
     builder.addCase(logIn.fulfilled, (state) => {
       state.loginRequest = false;
       state.loginSuccess = true;
       state.loginError = false;
+      state.error = null;
     });
-    builder.addCase(logIn.rejected, (state) => {
+
+    builder.addCase(logIn.rejected, (state, action) => {
       state.loginRequest = false;
       state.loginSuccess = false;
       state.loginError = true;
+      state.error = action.payload;
     });
   },
 });
