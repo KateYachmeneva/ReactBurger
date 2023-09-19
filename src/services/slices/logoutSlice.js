@@ -1,28 +1,26 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { logoutApi } from "../../utils/api";
-import { setError } from "./appSlice";
-import { CODES } from "../../utils/errors";
 import { getCookie, deleteCookie } from "../../utils/cookie";
 import { logoutUser } from "./userSlice";
-import { useSelector } from "react-redux";
+
 
 const initialState = {
   logoutRequest: false,
   logoutSuccess: false,
   logoutError: false,
-  error: null,
+  error:null,
 };
 
 export const logout = createAsyncThunk(
   "user/resetPassword",
-  async (_, { dispatch }) => {
-    const refreshToken = getCookie("refreshToken");
-    const response = await logoutApi(refreshToken);
-    deleteCookie("authToken");
-    deleteCookie("refreshToken");
-    dispatch(logoutUser());
-    return response;
-  },
+  async (_, { dispatch}) => {
+      const refreshToken = getCookie("refreshToken");
+      const response = await logoutApi(refreshToken);
+      deleteCookie("authToken");
+      deleteCookie("refreshToken");
+      dispatch(logoutUser());
+      return response;
+    },
 );
 
 export const logoutSlice = createSlice({
@@ -42,7 +40,7 @@ export const logoutSlice = createSlice({
       state.logoutError = false;
       state.error = null;
     });
-    builder.addCase(logout.rejected, (state, action) => {
+    builder.addCase(logout.rejected, (state,action) => {
       state.logoutRequest = false;
       state.loginSuccess = false;
       state.loginError = true;
