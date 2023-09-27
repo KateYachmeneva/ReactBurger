@@ -14,3 +14,6 @@
     align-items: center;
     gap: 9px;
 }
+.link {
+    text-decoration: none;
+  }

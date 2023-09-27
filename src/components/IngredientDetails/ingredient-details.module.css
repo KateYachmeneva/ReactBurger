@@ -4,9 +4,9 @@
     align-items: center;
   }
   
-  .title {
+  /* .title {
     align-self: baseline;
-  }
+  } */
   
   .table {
     display: flex;

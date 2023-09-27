@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import styles from "./burger-constructor.module.css";
+import { useNavigate } from "react-router-dom";
 import {
   ConstructorElement,
   CurrencyIcon,
@@ -18,7 +19,9 @@ import {
 import { useDrop } from "react-dnd";
 
 export default function BurgerConstructor() {
+  const { user } = useSelector((store) => store.userData);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { constructorIngredients } = useSelector(
     (store) => store.constrIngredients,
   );
@@ -53,8 +56,12 @@ export default function BurgerConstructor() {
     },
   });
   function submitOrder() {
-    dispatch(sendData(orderIngredients()));
-    setisOrderOpen(true);
+    if (user.name) {
+      dispatch(sendData(orderIngredients()));
+      setisOrderOpen(true);
+    } else {
+      navigate("/login");
+    }
   }
 
   function closeModal() {

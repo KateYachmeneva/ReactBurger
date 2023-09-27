@@ -28,3 +28,20 @@
   .header_link:last-of-type {
     justify-self: end;
   }
+  .nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  .link:last-of-type {
+    justify-self: end;
+  }
