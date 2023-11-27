@@ -17,7 +17,6 @@ type IntersectionEntry = {
 };
 
 export default function BurgerIngredients() {
-  const dispatch = useDispatch();
   const [current, setCurrent] = useState("buns");
   const [bunsRef, bunsInView, bunsTab] = useInView({ threshold: 0 });
   const [saucesRef, saucesInView, saucesTab] = useInView({ threshold: 0 });

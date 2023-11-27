@@ -3,7 +3,6 @@ import {
   Route,
   useLocation,
   useNavigate,
-  Router,
 } from "react-router-dom";
 import React from 'react';
 import { useEffect } from "react";
@@ -24,6 +23,7 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import styles from "./app.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import Modal from "../Modal/Modal";
+import Feed from "../../pages/Feed/Feed";
 
 function App() {
   const dispatch = useDispatch();
@@ -84,6 +84,18 @@ function App() {
           element={
             <ProtectedRoute onlyUnAuth={true}>
               <ResetPassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={"/ingredients/:ingredientId"}
+          element={<IngredientPage />}
+        />
+           <Route
+          path="/feed"
+          element={
+            <ProtectedRoute onlyUnAuth={true}>
+              <Feed/>
             </ProtectedRoute>
           }
         />

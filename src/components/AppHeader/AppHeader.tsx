@@ -34,7 +34,7 @@ export default function AppHeader() {
                 isActive ? `text_color_primary` : `text_color_inactive`
               }`
             }
-            to="/orders"
+            to="/feed"
           >
             {({ isActive }) => (
               <>

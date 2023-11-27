@@ -3,8 +3,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-width:45%;
-}
+  }
 .content {
   overflow-y: scroll;
 }

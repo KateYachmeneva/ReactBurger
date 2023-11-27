@@ -4,10 +4,7 @@
     align-items: center;
   }
   
-  /* .title {
-    align-self: baseline;
-  } */
-  
+
   .table {
     display: flex;
     gap: 20px;
