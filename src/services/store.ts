@@ -8,4 +8,3 @@ export const store = configureStore({
   middleware: [thunk],
 });
 export type AppDispatch = typeof store.dispatch;
-

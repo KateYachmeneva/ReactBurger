@@ -3,7 +3,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import styles from "./main.module.css";
 import BurgerConstructor from "../../components/BurgerConstructor/BurgerConstructor";
 import BurgerIngredients from "../../components/BurgerIngredients/BurgerIngredients";
-import React from 'react';
+import React from "react";
 
 function Main() {
   return (

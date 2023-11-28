@@ -9,20 +9,18 @@ import { useForm } from "../../hooks/useForm";
 import { updateUserInfo } from "../../services/slices/updateUserDataSlice";
 import { useState } from "react";
 import { objectsComparison } from "../../utils/utils";
-import { useSelector,useDispatch } from "../../services/hooks";
-import { TFullUserData } from '../../utils/types';
-import React from 'react';
-
+import { useSelector, useDispatch } from "../../services/hooks";
+import { TFullUserData } from "../../utils/types";
+import React from "react";
 
 function Profile() {
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.userData);
 
-
-  const {values, handleChange, setValues} = useForm<TFullUserData>({
+  const { values, handleChange, setValues } = useForm<TFullUserData>({
     email: user.email ?? "",
     name: user.name ?? "",
-    password: ''
+    password: "",
   });
 
   const [lockedFields, setLockedFields] = useState([
@@ -39,7 +37,7 @@ function Profile() {
     setLockedFields(["name", "email", "password"]);
   };
 
-  const toggleField = (name:string) => {
+  const toggleField = (name: string) => {
     setLockedFields(
       lockedFields.includes(name)
         ? lockedFields.filter((fieldName) => fieldName !== name)
@@ -50,7 +48,7 @@ function Profile() {
   const handleFormSubmit = () => {
     dispatch(updateUserInfo(values) as any);
     setLockedFields(["name", "email", "password"]);
-       setValues({
+    setValues({
       ...values,
       password: "",
     });
@@ -66,12 +64,12 @@ function Profile() {
         </p>
       </div>
       <form>
-          <Input
+        <Input
           type={"text"}
           placeholder={"Имя"}
           onChange={handleChange}
           value={values.name}
-          name={'name'}
+          name={"name"}
           error={false}
           errorText={"Ошибка"}
           size={"default"}
@@ -87,7 +85,7 @@ function Profile() {
           name={"email"}
           placeholder={"Логин"}
           extraClass="mb-6"
-          icon={'EditIcon'}
+          icon={"EditIcon"}
           disabled={lockedFields.includes("email")}
           onIconClick={() => toggleField("email")}
         />
@@ -122,6 +120,5 @@ function Profile() {
     </main>
   );
 }
-
 
 export default Profile;

@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "../../services/hooks";
-import React,{ FC } from "react";
+import React, { FC } from "react";
 interface IAuth {
   onlyUnAuth?: boolean;
   children: JSX.Element;
@@ -26,7 +26,6 @@ const ProtectedRoute: FC<IAuth> = ({ onlyUnAuth, children }) => {
   }
 
   return <>{children}</>;
-}
-
+};
 
 export default ProtectedRoute;

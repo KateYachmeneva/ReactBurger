@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function NotFound404() {
   return <div>NotFounf404</div>;

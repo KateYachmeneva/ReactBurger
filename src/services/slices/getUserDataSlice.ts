@@ -5,13 +5,12 @@ import { setUserData } from "./userSlice";
 import { getCookie, setCookie } from "../../utils/cookie";
 import { TTokenData } from "../../utils/types";
 
-
 interface IUserDataSlice {
-  getUserDataRequest: boolean
-  getUserDataSuccess: boolean
-  getUserDataError: boolean
-  authChecked: boolean
-  error:null | unknown
+  getUserDataRequest: boolean;
+  getUserDataSuccess: boolean;
+  getUserDataError: boolean;
+  authChecked: boolean;
+  error: null | unknown;
 }
 export const initialState: IUserDataSlice = {
   getUserDataRequest: false,
@@ -28,7 +27,7 @@ export const getUserInfo = createAsyncThunk(
     return response;
   },
 );
-export const checkUserAuth = () => async (dispatch:AppDispatch) => {
+export const checkUserAuth = () => async (dispatch: AppDispatch) => {
   if (getCookie("authToken")) {
     try {
       await dispatch(getUserInfo() as any);
@@ -41,10 +40,10 @@ export const refreshToken = createAsyncThunk(
   async (_, { dispatch }) => {
     try {
       const refreshTokenCookie = getCookie("refreshToken");
-      if (typeof refreshTokenCookie !== 'string') {
+      if (typeof refreshTokenCookie !== "string") {
         return { error: "Refresh token is missing." };
       }
-      const response : TTokenData = await updateTokenApi(refreshTokenCookie);
+      const response: TTokenData = await updateTokenApi(refreshTokenCookie);
       const authToken = response.accessToken.split("Bearer ")[1];
       const refreshToken = response.refreshToken;
       setCookie("authToken", authToken);

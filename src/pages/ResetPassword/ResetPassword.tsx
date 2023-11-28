@@ -1,17 +1,16 @@
 import styles from "./resetpassword.module.css";
-import AppHeader from "../../components/AppHeader/AppHeader";
 import Form from "../../components/Form/Form";
 import {
   PasswordInput,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { TFormData, TLink } from '../../utils/types';
+import { TFormData, TLink } from "../../utils/types";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch } from "../../services/hooks";
 import { useEffect } from "react";
 import { resetPassword } from "../../services/slices/userSlice";
-import React from 'react';
+import React from "react";
 
 const links: Array<TLink> = [
   {
@@ -42,7 +41,6 @@ function ResetPassword() {
   }, []);
   return (
     <div className={`${styles.page} text text_type_main-default`}>
-      <AppHeader />
       <main className={styles.content}>
         <Form
           title="Восстановление пароля"

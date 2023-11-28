@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch } from "../../services/hooks";
 import { forgotPassword } from "../../services/slices/userSlice";
-import {TLink} from "../../utils/types";
-import React from 'react';
+import { TLink } from "../../utils/types";
+import React from "react";
 
-const links:Array<TLink> = [
+const links: Array<TLink> = [
   {
     title: "Вспомнили пароль?",
     linkName: "Войти",

@@ -1,4 +1,4 @@
-import React,{FC} from "react";
+import React, { FC } from "react";
 import { useDispatch } from "../../../services/hooks";
 import styles from "./burger-ingredient.module.css";
 import {
@@ -11,10 +11,10 @@ import { Link, useLocation } from "react-router-dom";
 import { TIngredientData } from "../../../utils/types";
 
 type BurgerIngredientPropsType = {
-  item: TIngredientData
-  count: number
-}
-const BurgerIngredient: FC<BurgerIngredientPropsType> = ({item,count}) => {
+  item: TIngredientData;
+  count: number;
+};
+const BurgerIngredient: FC<BurgerIngredientPropsType> = ({ item, count }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const ingredientId = item["_id"];
@@ -35,11 +35,7 @@ const BurgerIngredient: FC<BurgerIngredientPropsType> = ({item,count}) => {
       state={{ background: location }}
     >
       {count !== 0 ? (
-        <Counter
-          extraClass={styles.counter}
-          count={count}
-          size="default"
-          />
+        <Counter extraClass={styles.counter} count={count} size="default" />
       ) : (
         ""
       )}
@@ -57,5 +53,5 @@ const BurgerIngredient: FC<BurgerIngredientPropsType> = ({item,count}) => {
       </article>
     </Link>
   );
-}
+};
 export default BurgerIngredient;

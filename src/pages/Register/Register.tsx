@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./register.module.css";
 import {
   Input,
@@ -6,14 +5,12 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Form from "../../components/Form/Form";
-
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
-import { toaster } from "evergreen-ui";
 import { registerUser } from "../../services/slices/registerSlice";
 import { FormEvent } from "react";
 import { useDispatch } from "../../services/hooks";
-import React from 'react';
+import React from "react";
 const links = [
   {
     title: "Уже зарегистрированы?",
@@ -35,14 +32,13 @@ function Register() {
     name: "",
   });
 
-  const handleRegister = (e:FormEvent<HTMLFormElement>) => {
-    // Обработчик сабмита формы
+  const handleRegister = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (checkSignUpValidity()) {
       dispatch(registerUser(values) as any);
       navigate("/login");
     } else {
-      toaster.notify("Нужно заполнить все данные");
+      alert("Нужно заполнить все данные");
     }
   };
   return (

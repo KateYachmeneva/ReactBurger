@@ -1,5 +1,5 @@
 import { TFormData, TUserData } from "./types";
-export function objectsComparison(obj1:TUserData, obj2:TFormData):boolean {
+export function objectsComparison(obj1: TUserData, obj2: TFormData): boolean {
   const entries1 = Object.entries(obj1);
   const entries2 = Object.entries(obj2);
   if (entries1.length !== entries2.length) {

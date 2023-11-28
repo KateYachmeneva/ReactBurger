@@ -2,15 +2,15 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { registerUserRequestApi } from "../../utils/api";
 import { setUserData } from "./userSlice";
 import { setCookie } from "../../utils/cookie";
-import {TFullUserData, TTokenData, TUserData} from "../../utils/types";
+import { TFullUserData, TTokenData, TUserData } from "../../utils/types";
 
 export type TRegisterState = {
-  registerRequest: boolean
-  registerSuccess: boolean
-  registerFailed: boolean
-  error: null | unknown
-}
-export const initialState :TRegisterState = {
+  registerRequest: boolean;
+  registerSuccess: boolean;
+  registerFailed: boolean;
+  error: null | unknown;
+};
+export const initialState: TRegisterState = {
   registerRequest: false,
   registerFailed: false,
   registerSuccess: false,
@@ -19,12 +19,12 @@ export const initialState :TRegisterState = {
 
 export const registerUser = createAsyncThunk(
   "registration/register",
-  async ({ email, password, name } : TFullUserData, { dispatch }) => {
-    const response = await registerUserRequestApi({
+  async ({ email, password, name }: TFullUserData, { dispatch }) => {
+    const response = (await registerUserRequestApi({
       email,
       password,
       name,
-    })as { user: TUserData } & TTokenData;
+    })) as { user: TUserData } & TTokenData;
     const authToken = response.accessToken.split("Bearer ")[1];
     const refreshToken = response.refreshToken;
     setCookie("authToken", authToken);

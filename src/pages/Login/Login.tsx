@@ -1,4 +1,4 @@
-import React,{ FormEvent } from "react";
+import React, { FormEvent } from "react";
 import styles from "./login.module.css";
 import {
   EmailInput,
@@ -33,7 +33,7 @@ function Login() {
     password: "",
   });
 
-  const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(
       logIn({

@@ -1,19 +1,20 @@
+
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getIngredientsApi } from "../../utils/api";
 import { TIngredientData } from "../../utils/types";
 
 interface IngredientsState {
-  isLoading: boolean
-  hasError: boolean
-  data: TIngredientData []
-  error:  unknown | null
-  selectedIngredient?: TIngredientData | null
+  isLoading: boolean;
+  hasError: boolean;
+  data: TIngredientData[];
+  error: unknown | null;
+  selectedIngredient?: TIngredientData | null;
 }
 const initialState: IngredientsState = {
   isLoading: false,
   hasError: false,
   data: [] as TIngredientData[],
-  error: null ,
+  error: null,
   selectedIngredient: null,
 };
 

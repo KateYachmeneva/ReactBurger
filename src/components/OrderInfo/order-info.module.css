@@ -1,0 +1,56 @@
+.main {
+    padding-top: 120px;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+  }
+  
+  .order {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .order h1 {
+    text-align: center;
+  }
+  
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .total {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .ingredients {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .ingredients li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-area: 16px;
+  }
+  
+  .ingredient {
+    padding: 2px;
+    border-radius: 100px;
+    background:  #131316;
+    background: linear-gradient(45deg, #801AB2 0%, #4C4CFF 100%);
+  }
+  
+  .ingredient div {
+    background:  #131316;
+    border-radius: 100px;
+  }
+  
+  .count {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }

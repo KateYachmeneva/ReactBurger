@@ -17,29 +17,29 @@ import {
   undoconstrIngredients,
 } from "../../services/slices/constrIngredientsSlice";
 import { useDrop } from "react-dnd";
-import { TIngredientData,TIngredientDataWithUuid } from '../../utils/types';
-
+import { TIngredientData, TIngredientDataWithUuid } from "../../utils/types";
 
 export default function BurgerConstructor() {
   const { user } = useSelector((store) => store.userData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { constructorIngredients }: { constructorIngredients: Array<TIngredientDataWithUuid > }  = useSelector(
+  const {
+    constructorIngredients,
+  }: { constructorIngredients: Array<TIngredientDataWithUuid> } = useSelector(
     (store) => store.constrIngredients,
   );
   const { bun } = useSelector((store) => store.constrIngredients);
 
   const [isOrderOpen, setisOrderOpen] = useState(false);
 
- function orderIngredients(){
-  
+  function orderIngredients() {
     const allIngredients = [
       bun._id,
       ...constructorIngredients.map((item) => item._id),
       bun._id,
     ];
     return allIngredients;
-  };
+  }
 
   const price = useMemo(() => {
     if (constructorIngredients && bun)
@@ -51,7 +51,7 @@ export default function BurgerConstructor() {
 
   const [, dropTarget] = useDrop({
     accept: "ingredients",
-    drop(ingredient:TIngredientData) {
+    drop(ingredient: TIngredientData) {
       if (ingredient.type !== "bun") {
         dispatch(addconstrIngredients(ingredient));
       } else {
@@ -61,7 +61,7 @@ export default function BurgerConstructor() {
   });
   function submitOrder() {
     if (user.name) {
-       //@ts-ignore
+      //@ts-ignore
       dispatch(sendData(orderIngredients()) as any);
       setisOrderOpen(true);
     } else {
@@ -118,9 +118,7 @@ export default function BurgerConstructor() {
             className={`${styles.currency} mr-10 text text_type_digits-medium`}
           >
             {price}
-            <CurrencyIcon
-               type = "primary"
-                  />
+            <CurrencyIcon type="primary" />
           </p>
           <Button
             disabled={constructorIngredients.length === 0 || !bun}

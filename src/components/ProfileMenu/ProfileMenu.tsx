@@ -1,8 +1,8 @@
 import styles from "./profile-menu.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../../services/slices/logoutSlice";
-import {  useDispatch } from "../../services/hooks";
-import React from 'react';
+import { useDispatch } from "../../services/hooks";
+import React from "react";
 
 export default function ProfileMenu() {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export default function ProfileMenu() {
         Профиль
       </NavLink>
       <NavLink
-        to="/order-history"
+        to="/profile/orders"
         className={({ isActive }) =>
           `${styles.link} text_type_main-medium ${
             isActive ? "text_color_primary" : "text_color_inactive"

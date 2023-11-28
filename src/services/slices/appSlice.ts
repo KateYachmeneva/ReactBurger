@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IAppSliceState {
-  error: string
-  loader: Boolean
+  error: string;
+  loader: Boolean;
 }
 const initialState: IAppSliceState = {
   error: "",

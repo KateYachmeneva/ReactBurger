@@ -1,16 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TIngredientDataWithUuid} from '../../utils/types';
+import { TIngredientDataWithUuid } from "../../utils/types";
 import missingIcon from "../../images/missing-icon.svg";
 
-
-
 interface SliceState {
-  constructorIngredients:TIngredientDataWithUuid[];
+  constructorIngredients: TIngredientDataWithUuid[];
 
   bun: TIngredientDataWithUuid;
 }
 
-const initialState:SliceState = {
+const initialState: SliceState = {
   constructorIngredients: [],
   bun: {
     _id: "",

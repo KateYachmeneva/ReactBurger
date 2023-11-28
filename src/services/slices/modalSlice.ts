@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export type TModalInitialState = {
-  isOpen: boolean
-}
-export const initialState : TModalInitialState = {
+  isOpen: boolean;
+};
+export const initialState: TModalInitialState = {
   isOpen: false,
 };
 

@@ -1,10 +1,5 @@
-import {
-  Routes,
-  Route,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
-import React from 'react';
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getIngredients } from "../../services/slices/ingredientsSlice";
@@ -15,11 +10,12 @@ import Profile from "../../pages/Profile/Profile";
 import NotFound404 from "../../pages/NotFound404/NotFound404";
 import ForgotPassword from "../../pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "../../pages/ResetPassword/ResetPassword";
-import Orders from "../../pages/Orders/Orders";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { checkUserAuth } from "../../services/slices/getUserDataSlice";
 import IngredientPage from "../../pages/IngredientPage/IngredientPage";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import OrderInfo from "../OrderInfo/OrderInfo";
+import OrderHistory from "../OrderHistory/OrderHistory";
 import styles from "./app.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import Modal from "../Modal/Modal";
@@ -45,8 +41,7 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<Main />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route
+          <Route
           path="/login"
           element={
             <ProtectedRoute onlyUnAuth={true}>
@@ -91,18 +86,16 @@ function App() {
           path={"/ingredients/:ingredientId"}
           element={<IngredientPage />}
         />
-           <Route
-          path="/feed"
+         <Route
+          path="/profile/orders"
           element={
-            <ProtectedRoute onlyUnAuth={true}>
-              <Feed/>
+            <ProtectedRoute onlyUnAuth={false}>
+              <OrderHistory />
             </ProtectedRoute>
           }
         />
-        <Route
-          path={"/ingredients/:ingredientId"}
-          element={<IngredientPage />}
-        />
+        <Route path={"/feed/number"} element={<OrderInfo />} />
+        <Route path={"/feed"} element={<Feed />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
       {background && (
@@ -117,7 +110,7 @@ function App() {
           />
         </Routes>
       )}
-    </div>
+      </div>
   );
 }
 

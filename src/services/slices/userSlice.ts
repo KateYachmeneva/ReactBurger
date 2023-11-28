@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { forgotPasswordApi, resetPasswordApi } from "../../utils/api";
-import { TFullUserData,TFormData} from "../../utils/types";
+import { TFullUserData, TFormData } from "../../utils/types";
 
 interface IUserData {
-  user: TFullUserData,
-  loginRequest: boolean,
-  loginFailed: boolean,
-  isLoggedIn: boolean,
-  loginError: null | unknown,
+  user: TFullUserData;
+  loginRequest: boolean;
+  loginFailed: boolean;
+  isLoggedIn: boolean;
+  loginError: null | unknown;
 }
-export const initialState : IUserData = {
+export const initialState: IUserData = {
   user: {} as TFullUserData,
   loginRequest: false,
   loginFailed: false,
@@ -40,7 +40,7 @@ export const userSlice = createSlice({
 
 export const forgotPassword = createAsyncThunk(
   "user/forgotPassword",
-  async (email:string) => {
+  async (email: string) => {
     const response = await forgotPasswordApi(email);
 
     return response;

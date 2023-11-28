@@ -1,7 +1,7 @@
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
-import React, { useRef, FC } from 'react';
+import React, { useRef, FC } from "react";
 import { TIngredientData } from "../../../utils/types";
-import { XYCoord,Identifier} from "dnd-core";
+import { XYCoord, Identifier } from "dnd-core";
 import {
   ConstructorElement,
   DragIcon,
@@ -12,41 +12,44 @@ import {
   updateconstrIngredients,
 } from "../../../services/slices/constrIngredientsSlice";
 
-
 type ConstructorIngredientPropsType = {
   ingredient: TIngredientData;
   index: number;
-}
+};
 
 interface DragItem {
-  index:number;
-  id:string;
+  index: number;
+  id: string;
 }
 interface CollectedProps {
-  handlerId: Identifier | null
+  handlerId: Identifier | null;
 }
-const ConstructorIngredient:FC<ConstructorIngredientPropsType> = ({ ingredient, index }) => {
+const ConstructorIngredient: FC<ConstructorIngredientPropsType> = ({
+  ingredient,
+  index,
+}) => {
   const dispatch = useDispatch();
 
   const ref = useRef<HTMLLIElement>(null);
-  const [{ handlerId }, drop] = useDrop<DragItem,void,CollectedProps>({
+  const [{ handlerId }, drop] = useDrop<DragItem, void, CollectedProps>({
     accept: ["UPDATE_CONSTRUCTOR_INGREDIENTS"],
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(item:DragItem, monitor: DropTargetMonitor) {
-      const dragIndex:number = item.index;
+    hover(item: DragItem, monitor: DropTargetMonitor) {
+      const dragIndex: number = item.index;
       const hoverIndex = index;
       if (dragIndex === hoverIndex) {
         return;
       }
-     if (!ref.current){
-      return;
-     }
+      if (!ref.current) {
+        return;
+      }
       const hoverBoundingRect = ref.current.getBoundingClientRect();
-      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
       const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
@@ -89,6 +92,6 @@ const ConstructorIngredient:FC<ConstructorIngredientPropsType> = ({ ingredient, 
       />
     </li>
   );
-}
+};
 
 export default ConstructorIngredient;

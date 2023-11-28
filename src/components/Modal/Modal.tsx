@@ -4,14 +4,20 @@ import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import { FC, PropsWithChildren, useEffect } from "react";
 import ReactDOM from "react-dom";
 import React from "react";
-const modalRoot = document.getElementById("react-modals") as Element | DocumentFragment;
+const modalRoot = document.getElementById("react-modals") as
+  | Element
+  | DocumentFragment;
 
 type ModalPropsType = {
   onClose: () => void;
   isOpen?: boolean;
- };
-const Modal: FC<PropsWithChildren<ModalPropsType>> = ({ children, onClose,isOpen }) => {
-  const closeWithEscape = (ev:KeyboardEvent) => {
+};
+const Modal: FC<PropsWithChildren<ModalPropsType>> = ({
+  children,
+  onClose,
+  isOpen,
+}) => {
+  const closeWithEscape = (ev: KeyboardEvent) => {
     if (ev.key === "Escape") {
       onClose();
     }
@@ -37,6 +43,6 @@ const Modal: FC<PropsWithChildren<ModalPropsType>> = ({ children, onClose,isOpen
     </>,
     modalRoot,
   );
-}
+};
 
 export default Modal;

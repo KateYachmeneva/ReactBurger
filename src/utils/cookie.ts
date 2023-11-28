@@ -1,4 +1,6 @@
-export function getCookie(name: "refreshToken" | "authToken"): string | undefined{
+export function getCookie(
+  name: "refreshToken" | "authToken",
+): string | undefined {
   let matches = document.cookie.match(
     new RegExp(
       "(?:^|; )" +
@@ -9,7 +11,11 @@ export function getCookie(name: "refreshToken" | "authToken"): string | undefine
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-export function setCookie(name:string, value:string,  props: { [key: string]: any } & { expires?: number | Date | string } = {}) {
+export function setCookie(
+  name: string,
+  value: string,
+  props: { [key: string]: any } & { expires?: number | Date | string } = {},
+) {
   props = props || {};
   let exp = props.expires;
   if (typeof exp == "number" && exp) {
@@ -17,7 +23,7 @@ export function setCookie(name:string, value:string,  props: { [key: string]: an
     d.setTime(d.getTime() + exp * 1000);
     exp = props.expires = d;
   }
-  if (exp && (exp instanceof Date)) {
+  if (exp && exp instanceof Date) {
     props.expires = exp.toUTCString();
   }
   value = encodeURIComponent(value);
@@ -32,6 +38,6 @@ export function setCookie(name:string, value:string,  props: { [key: string]: an
   document.cookie = updatedCookie;
 }
 
-export function deleteCookie(name:string) {
+export function deleteCookie(name: string) {
   setCookie(name, "", { expires: -1 });
 }

@@ -18,4 +18,4 @@ export const rootReducer = combineReducers({
   auth: getUserDataSlice,
   register: registerSlice,
 });
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>;

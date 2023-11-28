@@ -1,20 +1,10 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch,useSelector } from "../../services/hooks";
+import { useSelector } from "../../services/hooks";
 import BurgerIngredient from "./BurgerIngredient/BurgerIngredient";
 import { useInView } from "react-intersection-observer";
 import { TIngredientData } from "../../utils/types";
-
-type IntersectionEntry = {
-  time: number;
-  rootBounds: DOMRectReadOnly | null;
-  boundingClientRect: DOMRectReadOnly;
-  intersectionRect: DOMRectReadOnly;
-  isIntersecting: boolean;
-  target: Element;
-  isVisible: boolean; // Опциональное поле, если определено в вашей конфигурации
-};
 
 export default function BurgerIngredients() {
   const [current, setCurrent] = useState("buns");
@@ -29,8 +19,10 @@ export default function BurgerIngredients() {
     (store) => store.ingredients,
   );
 
-
-  const onTabClick = (tabType: string, entry: IntersectionObserverEntry | undefined) => {
+  const onTabClick = (
+    tabType: string,
+    entry: IntersectionObserverEntry | undefined,
+  ) => {
     setCurrent(tabType);
     if (entry) {
       entry.target.scrollIntoView({ behavior: "smooth" });
@@ -42,7 +34,7 @@ export default function BurgerIngredients() {
     bunsInView && setCurrent("buns");
   }, [bunsInView, saucesInView, mainsInView]);
 
-  const calculateCount = (ingredient:TIngredientData) => {
+  const calculateCount = (ingredient: TIngredientData) => {
     let count = 0;
     if (constructorIngredients && bun) {
       if (ingredient.type !== "bun") {

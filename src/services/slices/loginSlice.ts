@@ -2,16 +2,15 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { loginUserDataApi } from "../../utils/api";
 import { setCookie } from "../../utils/cookie";
 import { setUserData } from "./userSlice";
-import { ILoginUserData,TTokenData } from "../../utils/types";
-
+import { ILoginUserData, TTokenData } from "../../utils/types";
 
 interface ILoginSlice {
-  loginRequest: boolean
-  loginSuccess: boolean
-  loginError:  boolean
-  error:null | unknown
+  loginRequest: boolean;
+  loginSuccess: boolean;
+  loginError: boolean;
+  error: null | unknown;
 }
-const initialState:ILoginSlice = {
+const initialState: ILoginSlice = {
   loginRequest: false,
   loginSuccess: false,
   loginError: false,
@@ -21,7 +20,7 @@ const initialState:ILoginSlice = {
 export const logIn = createAsyncThunk(
   "login/user",
   async ({ email, password }: ILoginUserData, { dispatch }) => {
-    const response:TTokenData = await loginUserDataApi({ email, password });
+    const response: TTokenData = await loginUserDataApi({ email, password });
     const authToken = response.accessToken.split("Bearer ")[1];
     const refreshToken = response.refreshToken;
     setCookie("authToken", authToken);

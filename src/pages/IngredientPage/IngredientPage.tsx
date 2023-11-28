@@ -1,5 +1,5 @@
 import IngredientDetails from "../../components/IngredientDetails/IngredientDetails";
-import React from 'react';
+import React from "react";
 
 function IngredientPage() {
   return (
