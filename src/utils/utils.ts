@@ -1,4 +1,4 @@
-import { TFormData, TUserData } from "./types";
+import { TFormData, TUserData } from "../services/types/types";
 export function objectsComparison(obj1: TUserData, obj2: TFormData): boolean {
   const entries1 = Object.entries(obj1);
   const entries2 = Object.entries(obj2);

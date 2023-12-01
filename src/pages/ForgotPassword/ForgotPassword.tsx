@@ -3,9 +3,9 @@ import Form from "../../components/Form/Form";
 import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
-import { useDispatch } from "../../services/hooks";
+import { useDispatch } from "../../services/store";
 import { forgotPassword } from "../../services/slices/userSlice";
-import { TLink } from "../../utils/types";
+import { TLink } from "../../services/types/types";
 import React from "react";
 
 const links: Array<TLink> = [

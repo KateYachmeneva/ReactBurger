@@ -7,6 +7,7 @@ import registerSlice from "../slices/registerSlice";
 import getUserDataSlice from "../slices/getUserDataSlice";
 import constrIngredientsSlice from "../slices/constrIngredientsSlice";
 import orderDetailsSlice from "../slices/orderDetailsSlice";
+import { feedReducer } from "./feedReducer";
 
 export const rootReducer = combineReducers({
   ingredients: getIngridientsSlice,
@@ -17,5 +18,6 @@ export const rootReducer = combineReducers({
   userData: userSlice,
   auth: getUserDataSlice,
   register: registerSlice,
+  feed: feedReducer,
 });
 export type RootState = ReturnType<typeof rootReducer>;

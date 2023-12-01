@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { registerUser } from "../../services/slices/registerSlice";
 import { FormEvent } from "react";
-import { useDispatch } from "../../services/hooks";
+import { useDispatch } from "../../services/store";
 import React from "react";
 const links = [
   {

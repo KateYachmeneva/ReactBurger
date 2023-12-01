@@ -3,7 +3,7 @@ import { AppDispatch } from "../store";
 import { getUserDataApi, updateTokenApi } from "../../utils/api";
 import { setUserData } from "./userSlice";
 import { getCookie, setCookie } from "../../utils/cookie";
-import { TTokenData } from "../../utils/types";
+import { TTokenData } from "../types/types";
 
 interface IUserDataSlice {
   getUserDataRequest: boolean;

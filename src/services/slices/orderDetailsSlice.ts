@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { submitOrderApi } from "../../utils/api";
-import { TIngredientDataWithUuid } from "../../utils/types";
-import { TOrderData } from "../../utils/types";
+import { TIngredientDataWithUuid } from "../types/types";
+import { TOrderData } from "../types/types";
 
 type TOrderInitialState = {
   orderData: TOrderData;

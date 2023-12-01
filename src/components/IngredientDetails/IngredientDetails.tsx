@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
-import { useSelector } from "../../services/hooks";
+import { useDispatch, useSelector } from "../../services/store";
 import Preloader from "../preloader/preloader";
 
 export default function IngredientDetails() {

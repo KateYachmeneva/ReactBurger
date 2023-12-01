@@ -1,7 +1,7 @@
 import styles from "./profile-menu.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../../services/slices/logoutSlice";
-import { useDispatch } from "../../services/hooks";
+import { useDispatch } from "../../services/store";
 import React from "react";
 
 export default function ProfileMenu() {

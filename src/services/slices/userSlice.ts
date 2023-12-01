@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { forgotPasswordApi, resetPasswordApi } from "../../utils/api";
-import { TFullUserData, TFormData } from "../../utils/types";
+import { TFullUserData, TFormData } from "../types/types";
 
 interface IUserData {
   user: TFullUserData;

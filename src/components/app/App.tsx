@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import React from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/store";
 import { getIngredients } from "../../services/slices/ingredientsSlice";
 import Main from "../../pages/Main/Main";
 import Login from "../../pages/Login/Login";
@@ -32,8 +32,8 @@ function App() {
     navigate(-1);
   };
   useEffect(() => {
-    dispatch(getIngredients() as any);
-    dispatch(checkUserAuth() as any);
+    dispatch(getIngredients());
+    dispatch(checkUserAuth());
   }, []);
 
   return (
@@ -41,7 +41,7 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<Main />} />
-          <Route
+        <Route
           path="/login"
           element={
             <ProtectedRoute onlyUnAuth={true}>
@@ -86,7 +86,7 @@ function App() {
           path={"/ingredients/:ingredientId"}
           element={<IngredientPage />}
         />
-         <Route
+        <Route
           path="/profile/orders"
           element={
             <ProtectedRoute onlyUnAuth={false}>
@@ -110,7 +110,7 @@ function App() {
           />
         </Routes>
       )}
-      </div>
+    </div>
   );
 }
 

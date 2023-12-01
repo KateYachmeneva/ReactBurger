@@ -5,7 +5,7 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Form from "../../components/Form/Form";
-import { useDispatch } from "../../services/hooks";
+import { useDispatch } from "../../services/store";
 import { logIn } from "../../services/slices/loginSlice";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -25,9 +25,6 @@ const links = [
 
 function Login() {
   const dispatch = useDispatch();
-  const location = useLocation();
-  const navigate = useNavigate();
-
   const { values, handleChange } = useForm({
     email: "",
     password: "",

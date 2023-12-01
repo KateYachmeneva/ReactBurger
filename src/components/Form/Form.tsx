@@ -2,7 +2,7 @@ import styles from "./form.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import { FormEvent, FC, PropsWithChildren } from "react";
-import { TLink } from "../../utils/types";
+import { TLink } from "../../services/types/types";
 import React from "react";
 
 type FormPropsType = {

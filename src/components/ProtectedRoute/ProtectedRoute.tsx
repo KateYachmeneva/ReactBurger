@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useSelector } from "../../services/hooks";
+import { useSelector } from "../../services/store";
 import React, { FC } from "react";
 interface IAuth {
   onlyUnAuth?: boolean;

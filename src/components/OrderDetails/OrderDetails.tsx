@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./order-details.module.css";
 import doneIconPath from "../../images/done-icon.svg";
-import { useSelector } from "../../services/hooks";
+import { useSelector } from "../../services/store";
 
 function OrderDetails() {
   const { orderData } = useSelector((store) => store.orderDetails);

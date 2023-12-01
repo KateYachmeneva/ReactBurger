@@ -59,3 +59,23 @@ export interface IIngredientsResponse {
   email: string;
   phone: string;
 }
+export type TFeedOrder = {
+  ingredients: Array<string>;
+  _id: string;
+  name: string;
+  status: string;
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+};
+export type TFeedOrders = {
+  success: boolean;
+  orders: Array<TFeedOrder>;
+  total: number;
+  totalToday: number;
+};
+export enum WebsocketStatus {
+  CONNECTING = "CONNECTING...",
+  ONLINE = "ONLINE",
+  OFFLINE = "OFFLINE",
+}

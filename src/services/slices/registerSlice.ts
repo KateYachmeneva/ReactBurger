@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { registerUserRequestApi } from "../../utils/api";
 import { setUserData } from "./userSlice";
 import { setCookie } from "../../utils/cookie";
-import { TFullUserData, TTokenData, TUserData } from "../../utils/types";
+import { TFullUserData, TTokenData, TUserData } from "../types/types";
 
 export type TRegisterState = {
   registerRequest: boolean;

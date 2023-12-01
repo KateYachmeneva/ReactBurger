@@ -9,8 +9,8 @@ import { useForm } from "../../hooks/useForm";
 import { updateUserInfo } from "../../services/slices/updateUserDataSlice";
 import { useState } from "react";
 import { objectsComparison } from "../../utils/utils";
-import { useSelector, useDispatch } from "../../services/hooks";
-import { TFullUserData } from "../../utils/types";
+import { useDispatch, useSelector } from "../../services/store";
+import { TFullUserData } from "../../services/types/types";
 import React from "react";
 
 function Profile() {

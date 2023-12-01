@@ -6,7 +6,7 @@ import {
   ILoginUserData,
   TUserData,
   TTokenData,
-} from "../utils/types";
+} from "../services/types/types";
 const API_URL = "https://norma.nomoreparties.space/api";
 
 const checkResponse = <T>(res: Response): Promise<T> => {

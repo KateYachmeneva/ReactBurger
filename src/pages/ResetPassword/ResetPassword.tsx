@@ -4,10 +4,10 @@ import {
   PasswordInput,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { TFormData, TLink } from "../../utils/types";
+import { TFormData, TLink } from "../../services/types/types";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
-import { useDispatch } from "../../services/hooks";
+import { useDispatch } from "../../services/store";
 import { useEffect } from "react";
 import { resetPassword } from "../../services/slices/userSlice";
 import React from "react";

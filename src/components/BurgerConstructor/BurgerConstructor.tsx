@@ -10,14 +10,17 @@ import ConstructorIngredient from "./ConstructorIngredient/ConstructorIngredient
 import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import { sendData } from "../../services/slices/orderDetailsSlice";
-import { useSelector, useDispatch } from "../../services/hooks";
+import { useDispatch, useSelector } from "../../services/store";
 import {
   addconstrIngredients,
   setconstrBun,
   undoconstrIngredients,
 } from "../../services/slices/constrIngredientsSlice";
 import { useDrop } from "react-dnd";
-import { TIngredientData, TIngredientDataWithUuid } from "../../utils/types";
+import {
+  TIngredientData,
+  TIngredientDataWithUuid,
+} from "../../services/types/types";
 
 export default function BurgerConstructor() {
   const { user } = useSelector((store) => store.userData);

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useDispatch } from "../../../services/hooks";
+import { useDispatch } from "../../../services/store";
 import styles from "./burger-ingredient.module.css";
 import {
   Counter,
@@ -8,7 +8,7 @@ import {
 import { setSelectedIngredient } from "../../../services/slices/ingredientsSlice";
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from "react-router-dom";
-import { TIngredientData } from "../../../utils/types";
+import { TIngredientData } from "../../../services/types/types";
 
 type BurgerIngredientPropsType = {
   item: TIngredientData;

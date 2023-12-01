@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { updateUserDataApi } from "../../utils/api";
 import { setUserData } from "./userSlice";
 import { getCookie } from "../../utils/cookie";
-import { TFullUserData } from "../../utils/types";
+import { TFullUserData } from "../types/types";
 
 export type TUpdateUserState = {
   updateUserDataRequest: boolean;

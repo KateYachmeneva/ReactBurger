@@ -1,12 +1,12 @@
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import React, { useRef, FC } from "react";
-import { TIngredientData } from "../../../utils/types";
+import { TIngredientData } from "../../../services/types/types";
 import { XYCoord, Identifier } from "dnd-core";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "../../../services/hooks";
+import { useDispatch } from "../../../services/store";
 import {
   deleteconstrIngredient,
   updateconstrIngredients,

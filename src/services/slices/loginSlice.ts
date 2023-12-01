@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { loginUserDataApi } from "../../utils/api";
 import { setCookie } from "../../utils/cookie";
 import { setUserData } from "./userSlice";
-import { ILoginUserData, TTokenData } from "../../utils/types";
+import { ILoginUserData, TTokenData } from "../types/types";
 
 interface ILoginSlice {
   loginRequest: boolean;

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TIngredientDataWithUuid } from "../../utils/types";
+import { TIngredientDataWithUuid } from "../types/types";
 import missingIcon from "../../images/missing-icon.svg";
 
 interface SliceState {

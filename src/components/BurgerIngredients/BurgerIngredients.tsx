@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "../../services/hooks";
+import { useSelector } from "../../services/store";
 import BurgerIngredient from "./BurgerIngredient/BurgerIngredient";
 import { useInView } from "react-intersection-observer";
-import { TIngredientData } from "../../utils/types";
+import { TIngredientData } from "../../services/types/types";
 
 export default function BurgerIngredients() {
   const [current, setCurrent] = useState("buns");
