@@ -1,17 +1,13 @@
 import styles from "./feedlist.module.css";
 import OrderCard from "../OrderCard/OrderCard";
+import { useSelector } from "../../services/store";
+
 function FeedList() {
+  const { orders } = useSelector((state) => state.feed);
   return (
-    <section className={styles.section_feedlist}>
-      <ul className={`${styles.container} custom-scroll`}>
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-      </ul>
-    </section>
+    <div className={`${styles.container} custom-scroll`}>
+      {orders?.map((order) => <OrderCard key={order._id} order={order} />)}
+    </div>
   );
 }
 

@@ -1,13 +1,8 @@
-.section_feedlist{
-    height: calc(100vh - 236px);
-    overflow: hidden;
+
+.container{
+    padding-right: 8px;
     display: flex;
     flex-direction: column;
-    }
-.container{
-  padding-right: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  overflow-y: auto;
+    gap: 16px;
+    overflow-y: auto;
       }

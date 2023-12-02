@@ -6,12 +6,51 @@
     grid-template-columns: 1fr auto;
     gap: 24px;
   }
+  .orderTitle {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  
 .total {
     display: flex;
     align-items:center;
     gap:8px;
+    justify-content: flex-end;
 
 }
 li{
     list-style:none;
 }
+.ingredients{
+    display:flex;
+    padding:0;
+  }
+.ingredient{
+    padding:2px;
+    max-width:64px;
+    border-radius: 100px;
+    background:  #131316;
+    background: linear-gradient(45deg, #801AB2 0%, #4C4CFF 100%);
+    margin-left: -10px;
+}
+.count {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+  }
+  .ingredientWrapper {
+    background:  #131316;
+    border-radius: 100px;
+    max-width: 64px;
+    display: flex;
+    aspect-ratio: 1;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .ingredientWrapperDissabled{
+    filter: brightness(.5);
+  }

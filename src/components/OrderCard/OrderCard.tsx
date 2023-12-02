@@ -1,31 +1,94 @@
+import React, { FC, useMemo } from "react";
 import styles from "./ordercard.module.css";
-import bunImage from "../../images/bun-01.png";
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  CurrencyIcon,
+  FormattedDate,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import { TFeedOrder, TIngredientData } from "../../services/types/types";
+import { useSelector } from "../../services/store";
+type OrderCardPropsType = {
+  order: TFeedOrder;
+};
+const OrderCard: FC<OrderCardPropsType> = ({ order }) => {
+  const { data } = useSelector((store) => store.ingredients);
+  const maxIngredientsToShow = 6;
+  const memoOrder = useMemo(() => {
+    if (!data.length) {
+      return null;
+    }
 
-function OrderCard() {
+    const ingredientsInfo = order.ingredients.reduce(
+      (acc: any, item: string) => {
+        const ingredient = data.find((ing) => ing._id === item);
+        if (ingredient) acc.push(ingredient);
+        return acc;
+      },
+      [],
+    );
+    const total = ingredientsInfo.reduce((acc: any, item: TIngredientData) => {
+      return acc + item.price;
+    }, 0);
+    const ingredientsToShow = ingredientsInfo.slice(0, maxIngredientsToShow);
+    const hiddenIngredients =
+      ingredientsInfo > maxIngredientsToShow
+        ? ingredientsInfo.length - maxIngredientsToShow
+        : null;
+    return {
+      ...order,
+      ingredientsInfo,
+      total,
+      ingredientsToShow,
+      hiddenIngredients,
+    };
+  }, [data, order]);
+  if (!memoOrder) return null;
+  console.log(memoOrder.hiddenIngredients);
   return (
     <li className={`${styles.order} p-6`}>
-      <h3 className="text text_type_digits-default">27221</h3>
+      <h3 className="text text_type_digits-default">{order.number}</h3>
       <p className="text text_type_main-default text_color_inactive">
-        Сегодня, 16:20
+        <FormattedDate date={new Date(order.createdAt)} />
       </p>
       <h2 className={`${styles.orderTitle} text text_type_main-medium`}>
-        Death Star Starship Main бургер
+        {order.name}
       </h2>
-      <p className={`${styles.status} text text_type_main-default`}>Создан</p>
       <ul className={styles.ingredients}>
-        <li className={styles.ingridient}>
-          <div>
-            <img src={bunImage} />
-          </div>
-        </li>
+        {memoOrder.ingredientsToShow.map(
+          (item: TIngredientData, index: number) => {
+            let zIndex = maxIngredientsToShow - index;
+            let ishidden = index + 1 === maxIngredientsToShow;
+            return (
+              <li
+                className={styles.ingredient}
+                key={index}
+                style={{ zIndex: zIndex }}
+              >
+                <div
+                  className={`${styles.ingredientWrapper} ${
+                    ishidden && styles.ingredientWrapperDissabled
+                  }`}
+                >
+                  <img src={item.image_mobile} alt={item.name} />
+                  {ishidden ? (
+                    <span
+                      className={`${styles.count} text text_type_main-defaul`}
+                    >
+                      {" "}
+                      + {memoOrder.hiddenIngredients}
+                    </span>
+                  ) : null}
+                </div>
+              </li>
+            );
+          },
+        )}
       </ul>
       <div className={styles.total}>
-        <p className="text text_type_digits-default">480</p>
+        <p className="text text_type_digits-default">{memoOrder.total}</p>
         <CurrencyIcon type="primary" />
       </div>
     </li>
   );
-}
+};
 
 export default OrderCard;
