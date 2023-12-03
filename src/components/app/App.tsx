@@ -94,7 +94,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path={"/feed/number"} element={<OrderInfo />} />
         <Route path={"/feed"} element={<Feed />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
@@ -105,6 +104,22 @@ function App() {
             element={
               <Modal onClose={closeModal}>
                 <IngredientDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path={"/feed/:number"}
+            element={
+              <Modal onClose={closeModal}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+          <Route
+            path={"/order-history/:number"}
+            element={
+              <Modal onClose={closeModal}>
+                <OrderInfo />
               </Modal>
             }
           />

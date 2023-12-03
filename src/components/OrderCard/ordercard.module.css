@@ -54,3 +54,7 @@ li{
   .ingredientWrapperDissabled{
     filter: brightness(.5);
   }
+  .Link{
+    text-decoration: none;
+    color:inherit
+   }

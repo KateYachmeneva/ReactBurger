@@ -63,7 +63,7 @@ export type TFeedOrder = {
   ingredients: Array<string>;
   _id: string;
   name: string;
-  status: string;
+  status: OrderStatus;
   number: number;
   createdAt: string;
   updatedAt: string;
@@ -78,4 +78,16 @@ export enum WebsocketStatus {
   CONNECTING = "CONNECTING...",
   ONLINE = "ONLINE",
   OFFLINE = "OFFLINE",
+}
+export enum OrderStatus {
+  done = 'done',
+  pending = 'pending'
+}
+export function formatOrderStatus(orderStatus: OrderStatus): string {
+  switch (orderStatus) {
+    case OrderStatus.done:
+      return 'Выполнен'
+    case OrderStatus.pending:
+      return 'Создан'
+  }
 }

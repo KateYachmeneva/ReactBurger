@@ -1,59 +1,103 @@
+import { useParams } from "react-router-dom";
+import { useMemo } from "react";
 import styles from "./order-info.module.css";
-import bunImage from "../../images/bun-01.png";
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useSelector } from "../../services/store";
+import {
+  TFeedOrder,
+  TIngredientData,
+  formatOrderStatus,
+} from "../../services/types/types";
+import {
+  CurrencyIcon,
+  FormattedDate,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 
 function OrderInfo() {
-  // const { data, isLoading } = useSelector((store) => store.ingredients);
+  const { orders } = useSelector((state) => state.feed);
+  const { data } = useSelector((state) => state.ingredients);
+  const { number } = useParams();
+  const order: TFeedOrder | undefined = orders?.find(
+    (item) => item.number.toString() === number,
+  );
+  const memoOrder = useMemo(() => {
+    if (!data.length || !orders?.length) return null;
+    const ingredientsInfo: Array<TIngredientData> = order?.ingredients.reduce(
+      (acc: any, item: string) => {
+        const ingredient = data.find((ing) => ing._id === item);
+        acc.push(ingredient);
+        return acc;
+      },
+      [],
+    );
+    const oneIngredients: Array<TIngredientData> = ingredientsInfo.filter(
+      (element, index, selfArr) =>
+        index === selfArr.findIndex((t) => t._id === element._id),
+    );
+    type TcountIngredients = {
+      [key: string]: number;
+    };
+    const countIngredients = ingredientsInfo.reduce(
+      (acc: TcountIngredients, ingredient: { _id: string | number }) => {
+        acc[ingredient._id] = (acc[ingredient._id] || 0) + 1;
+        return acc;
+      },
+      {},
+    );
+    const total = ingredientsInfo.reduce((acc: any, item: TIngredientData) => {
+      return acc + item.price;
+    }, 0);
+    return {
+      ...order,
+      ingredientsInfo,
+      oneIngredients,
+      countIngredients,
+      total,
+    };
+  }, [data, order, orders?.length]);
 
-  // let { ingredientId } = useParams();
-
-  // if (isLoading) {
-  //   // Показываем Preloader во время загрузки данных
-  //   return <Preloader />;
-  // }
-
-  // let ingredient = data.find((ingredient) => ingredient._id === ingredientId);
-
-  return (
-    <main className={styles.main}>
-      <section className={styles.order}>
-        <h1 className="text text_type_digits-default mb-10">#034533</h1>
-        <h2 className="text text_type_main-medium mb-3">
-          Black Hole Singularity острый бургер
-        </h2>
+  if (order && memoOrder)
+    return (
+      <section className={`${styles.order} mt-5`}>
+        <h1 className="text text_type_digits-default mb-10">{`# ${number}`}</h1>
+        <h2 className="text text_type_main-medium mb-3">{order.name}</h2>
         <p className="text text_type_main-default mb-15 text_color_success">
-          Выполнен
+          {formatOrderStatus(order.status)}
         </p>
         <h3 className="text text_type_main-medium mb-6">Состав:</h3>
-        <ul className={`${styles.container} mb-10 custom-scroll`}>
-          <li>
-            <div className={styles.ingredient}>
-              <div>
-                <img src={bunImage} />
+        <ul className={`${styles.ingredients} mb-10 custom-scroll`}>
+          {memoOrder.oneIngredients.map((ingredient, index) => (
+            <li key={index}>
+              <div className={styles.ingredient}>
+                <div className={styles.ingredientWrapper}>
+                  <img src={ingredient.image_mobile} alt={ingredient.name} />
+                </div>
               </div>
-            </div>
-            <p>Флюоресцентная булка R2-D3</p>
-            <div className={styles.count}>
-              <div>
-                2<span>x</span>
-                20
+              <p className={styles.ingredientName}>{ingredient.name}</p>
+              <div className={styles.count}>
+                <div>
+                  {memoOrder.countIngredients[ingredient._id]}
+                  <span>x</span>
+                  {ingredient.price}
+                </div>
+                <CurrencyIcon type="primary" />
               </div>
-              <CurrencyIcon type="primary" />
-            </div>
-          </li>
+            </li>
+          ))}
         </ul>
         <div className={styles.wrapper}>
           <p className="text text_type_main-default text_color_inactive">
-            Вчера, 13:50
+            <FormattedDate date={new Date(order.createdAt)} />
           </p>
           <div className={styles.total}>
-            <p className="text text_type_digits-default">510</p>
+            <p className="text text_type_digits-default">{memoOrder.total}</p>
             <CurrencyIcon type="primary" />
           </div>
         </div>
       </section>
-    </main>
-  );
+    );
+  else {
+    return null;
+  }
 }
 
 export default OrderInfo;
