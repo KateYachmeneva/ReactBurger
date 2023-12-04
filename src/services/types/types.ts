@@ -80,14 +80,17 @@ export enum WebsocketStatus {
   OFFLINE = "OFFLINE",
 }
 export enum OrderStatus {
-  done = 'done',
-  pending = 'pending'
+  done = "done",
+  pending = "pending",
+  created = "created",
 }
 export function formatOrderStatus(orderStatus: OrderStatus): string {
   switch (orderStatus) {
     case OrderStatus.done:
-      return 'Выполнен'
+      return "Выполнен";
     case OrderStatus.pending:
-      return 'Создан'
+      return "Готовится";
+    case OrderStatus.created:
+      return "Создан";
   }
 }

@@ -87,7 +87,7 @@ function App() {
           element={<IngredientPage />}
         />
         <Route
-          path="/profile/orders"
+          path="/order-history"
           element={
             <ProtectedRoute onlyUnAuth={false}>
               <OrderHistory />

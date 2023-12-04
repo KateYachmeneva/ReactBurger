@@ -18,7 +18,6 @@ const checkResponse = <T>(res: Response): Promise<T> => {
 const checkSuccess = (
   data: { success: string; data: any },
   returnData: any,
-  // returnData: Promise<CustomResponse<TResponseBody<>>
 ) => {
   return data.success
     ? returnData
@@ -36,22 +35,16 @@ export const getIngredientsApi = async (): Promise<TIngredientData[]> => {
   return checkSuccess(data, data.data);
 };
 
-// export const getIngridientsApi = () => {
-//   return request<TIngredientData[]>(`${API_URL}/ingredients`, {
-//     method: "GET",
-//     headers: {
-//       Accept: "application/json",
-//       "Content-Type": "application/json",
-//     },
-//   });
-// };
-
-export const submitOrderApi = (ingredients: Array<TIngredientData>) => {
+export const submitOrderApi = (
+  ingredients: Array<TIngredientData>,
+  token: string | undefined,
+) => {
   return request(`${API_URL}/orders`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       ingredients: ingredients,

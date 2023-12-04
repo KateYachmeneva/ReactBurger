@@ -58,8 +58,6 @@ export const socketMiddleware = (
         socket.onmessage = (event) => {
           const { data } = event;
           const parsedData = JSON.parse(data);
-          const { success, ...restParsedData } = parsedData;
-
           dispatch(onMessage(parsedData));
         };
 

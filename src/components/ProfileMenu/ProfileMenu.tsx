@@ -9,7 +9,7 @@ export default function ProfileMenu() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout() as any);
+    dispatch(logout());
     navigate("/profile");
   };
   return (
@@ -25,7 +25,7 @@ export default function ProfileMenu() {
         Профиль
       </NavLink>
       <NavLink
-        to="/profile/orders"
+        to="/order-history"
         className={({ isActive }) =>
           `${styles.link} text_type_main-medium ${
             isActive ? "text_color_primary" : "text_color_inactive"
