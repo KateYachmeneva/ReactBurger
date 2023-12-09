@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useMemo } from "react";
 import styles from "./order-info.module.css";
 import { useSelector } from "../../services/store";
@@ -7,20 +7,42 @@ import {
   TIngredientData,
   formatOrderStatus,
 } from "../../services/types/types";
+import { useEffect } from "react";
 import {
   CurrencyIcon,
   FormattedDate,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useDispatch } from "../../services/store";
+import { API_WSS_FEED_USER, API_WSS_FEED } from "../../utils/constants";
+import { getCookie } from "../../utils/cookie";
+import { connect, disconnect } from "../../services/actions/actions";
+import Preloader from "../preloader/preloader";
 
 function OrderInfo() {
+  const dispatch = useDispatch();
+  const accessToken = getCookie("authToken");
+  const location = useLocation();
+  const url = location.pathname.includes("feed")
+    ? API_WSS_FEED
+    : `${API_WSS_FEED_USER}?token=${accessToken}`;
+  useEffect(() => {
+    dispatch(connect(url));
+    return () => {
+      dispatch(disconnect());
+    };
+  }, [dispatch]);
   const { orders } = useSelector((state) => state.feed);
+  const feed = useParams();
+  console.log(feed);
   const { data } = useSelector((state) => state.ingredients);
   const { number } = useParams();
   const order: TFeedOrder | undefined = orders?.find(
     (item) => item.number.toString() === number,
   );
+
   const memoOrder = useMemo(() => {
     if (!data.length || !orders?.length) return null;
+
     const ingredientsInfo: Array<TIngredientData> = order?.ingredients.reduce(
       (acc: any, item: string) => {
         const ingredient = data.find((ing) => ing._id === item);
@@ -96,7 +118,7 @@ function OrderInfo() {
       </section>
     );
   else {
-    return null;
+    return <Preloader />;
   }
 }
 

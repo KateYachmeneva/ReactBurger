@@ -83,9 +83,19 @@ function App() {
           }
         />
         <Route
+          path="/order-history/:number"
+          element={
+            <ProtectedRoute onlyUnAuth={false}>
+              <OrderInfo />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path={"/ingredients/:ingredientId"}
           element={<IngredientPage />}
         />
+        <Route path={"/feed/:number"} element={<OrderInfo />} />
+
         <Route
           path="/order-history"
           element={
