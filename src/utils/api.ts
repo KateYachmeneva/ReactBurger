@@ -9,11 +9,11 @@ import {
 } from "../services/types/types";
 const API_URL = "https://norma.nomoreparties.space/api";
 
-const checkResponse = <T>(res: Response): Promise<T> => {
-  if (res.ok) {
-    return res.json();
+const checkResponse = <T>(response: Response): Promise<T> => {
+  if (response.ok) {
+    return response.json();
   }
-  return Promise.reject(`ошибка ${res.status}`);
+  return Promise.reject(`ошибка ${response.status}`);
 };
 const checkSuccess = (
   data: { success: string; data: any },

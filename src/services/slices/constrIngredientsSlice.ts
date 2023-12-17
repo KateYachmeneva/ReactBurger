@@ -8,7 +8,7 @@ interface SliceState {
   bun: TIngredientDataWithUuid;
 }
 
-const initialState: SliceState = {
+export const initialState: SliceState = {
   constructorIngredients: [],
   bun: {
     _id: "",
@@ -43,7 +43,6 @@ export const constrIngredientsSlice = createSlice({
     addconstrIngredients: (state, action) => {
       const newIngredient = {
         ...action.payload,
-        uuid: crypto.randomUUID(),
       };
       state.constructorIngredients.push(newIngredient);
     },
