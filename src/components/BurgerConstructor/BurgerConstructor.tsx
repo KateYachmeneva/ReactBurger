@@ -81,7 +81,11 @@ export default function BurgerConstructor() {
   return (
     <>
       <section className={`${styles.constructor} pt-25 mb-10`}>
-        <div className={`${styles.burger_item} mb-10`} ref={dropTarget}>
+        <div
+          className={`${styles.burger_item} mb-10`}
+          ref={dropTarget}
+          data-testid="constructor"
+        >
           {bun && (
             <ConstructorElement
               type="top"
@@ -96,7 +100,7 @@ export default function BurgerConstructor() {
             {constructorIngredients.map((ingredient, index) => (
               <ConstructorIngredient
                 ingredient={ingredient}
-                key={ingredient.uuid}
+                key={ingredient._id}
                 index={index}
               />
             ))}
@@ -129,6 +133,7 @@ export default function BurgerConstructor() {
             type="primary"
             size="large"
             onClick={submitOrder}
+            data-testid="order-button"
           >
             Оформить заказ
           </Button>

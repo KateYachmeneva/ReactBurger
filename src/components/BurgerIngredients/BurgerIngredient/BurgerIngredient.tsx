@@ -29,6 +29,7 @@ const BurgerIngredient: FC<BurgerIngredientPropsType> = ({ item, count }) => {
 
   return (
     <Link
+      data-testid={item._id}
       key={ingredientId}
       className={`${styles.link} text_color_primary`}
       to={`/ingredients/${ingredientId}`}

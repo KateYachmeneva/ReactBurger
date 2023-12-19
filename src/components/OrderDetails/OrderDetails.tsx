@@ -8,7 +8,10 @@ function OrderDetails() {
   return (
     orderData && (
       <>
-        <h2 className={`${styles.number} text text_type_digits-large`}>
+        <h2
+          className={`${styles.number} text text_type_digits-large`}
+          data-testid="order_details-number"
+        >
           {orderData.order.number}
         </h2>
         <p className="text text_type_main-medium mt-8">Идентификатор заказа</p>

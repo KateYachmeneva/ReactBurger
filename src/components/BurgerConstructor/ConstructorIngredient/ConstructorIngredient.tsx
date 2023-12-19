@@ -78,7 +78,6 @@ const ConstructorIngredient: FC<ConstructorIngredientPropsType> = ({
   });
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
-
   return (
     <li style={{ opacity }} data-handler-id={handlerId} ref={ref}>
       <DragIcon type="primary" />
