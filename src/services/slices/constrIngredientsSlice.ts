@@ -41,10 +41,7 @@ export const constrIngredientsSlice = createSlice({
     },
 
     addconstrIngredients: (state, action) => {
-      const newIngredient = {
-        ...action.payload,
-      };
-      state.constructorIngredients.push(newIngredient);
+      state.constructorIngredients.push(action.payload);
     },
     setconstrBun: (state, action) => {
       state.bun = action.payload;

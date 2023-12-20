@@ -56,9 +56,11 @@ export default function BurgerConstructor() {
     accept: "ingredients",
     drop(ingredient: TIngredientData) {
       if (ingredient.type !== "bun") {
-        dispatch(addconstrIngredients(ingredient));
+        dispatch(addconstrIngredients({...ingredient,
+          uuid: crypto.randomUUID()}));
       } else {
-        dispatch(setconstrBun(ingredient));
+        dispatch(setconstrBun(  {...ingredient,
+          uuid: crypto.randomUUID()}));
       }
     },
   });
@@ -100,7 +102,7 @@ export default function BurgerConstructor() {
             {constructorIngredients.map((ingredient, index) => (
               <ConstructorIngredient
                 ingredient={ingredient}
-                key={ingredient._id}
+                key={ingredient.uuid}
                 index={index}
               />
             ))}
