@@ -56,9 +56,11 @@ export default function BurgerConstructor() {
     accept: "ingredients",
     drop(ingredient: TIngredientData) {
       if (ingredient.type !== "bun") {
-        dispatch(addconstrIngredients(ingredient));
+        dispatch(addconstrIngredients({...ingredient,
+          uuid: crypto.randomUUID()}));
       } else {
-        dispatch(setconstrBun(ingredient));
+        dispatch(setconstrBun(  {...ingredient,
+          uuid: crypto.randomUUID()}));
       }
     },
   });
@@ -81,7 +83,11 @@ export default function BurgerConstructor() {
   return (
     <>
       <section className={`${styles.constructor} pt-25 mb-10`}>
-        <div className={`${styles.burger_item} mb-10`} ref={dropTarget}>
+        <div
+          className={`${styles.burger_item} mb-10`}
+          ref={dropTarget}
+          data-testid="constructor"
+        >
           {bun && (
             <ConstructorElement
               type="top"
@@ -129,6 +135,7 @@ export default function BurgerConstructor() {
             type="primary"
             size="large"
             onClick={submitOrder}
+            data-testid="order-button"
           >
             Оформить заказ
           </Button>

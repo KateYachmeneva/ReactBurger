@@ -30,7 +30,7 @@ export const sendData = createAsyncThunk(
   },
 );
 export const orderDetailsSlice = createSlice({
-  name: "data",
+  name: "orderDetails",
   initialState,
   reducers: {},
   extraReducers(builder) {

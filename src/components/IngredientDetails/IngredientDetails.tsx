@@ -24,7 +24,10 @@ export default function IngredientDetails() {
         {ingredient ? (
           <>
             <img src={ingredient.image_large} alt={ingredient.name} />
-            <p className="mt-4 mb-8 text text_type_main-medium">
+            <p
+              className="mt-4 mb-8 text text_type_main-medium"
+              data-testid="ingredient_details-name"
+            >
               {ingredient.name}
             </p>
             <ul
@@ -34,27 +37,39 @@ export default function IngredientDetails() {
                 <h3 className="text text_type_main-default mb-2">
                   Калории,ккал
                 </h3>
-                <p className="text text_type_digits-default">
+                <p
+                  className="text text_type_digits-default"
+                  data-testid="ingredient_details-value"
+                >
                   {ingredient.calories}
                 </p>
               </li>
               <li className={styles.tableItem}>
                 <h3 className="text text_type_main-default mb-2">Белки, г</h3>
-                <p className="text text_type_digits-default">
+                <p
+                  className="text text_type_digits-default"
+                  data-testid="ingredient_details-proteins"
+                >
                   {ingredient.proteins}
                 </p>
               </li>
               <li className={styles.tableItem}>
                 <h3 className="text text_type_main-default mb-2">Жиры, г</h3>
-                <p className="text text_type_digits-default">
-                  {ingredient.calories}
+                <p
+                  className="text text_type_digits-default"
+                  data-testid="ingredient_details-fat"
+                >
+                  {ingredient.fat}
                 </p>
               </li>
               <li className={styles.tableItem}>
                 <h3 className="text text_type_main-default mb-2">
                   Углеводы, г
                 </h3>
-                <p className="text text_type_digits-default">
+                <p
+                  className="text text_type_digits-default"
+                  data-testid="ingredient_details-carbohydrates"
+                >
                   {ingredient.carbohydrates}
                 </p>
               </li>

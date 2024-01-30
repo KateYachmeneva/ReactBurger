@@ -11,7 +11,7 @@ import NotFound404 from "../../pages/NotFound404/NotFound404";
 import ForgotPassword from "../../pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "../../pages/ResetPassword/ResetPassword";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import { checkUserAuth } from "../../services/slices/getUserDataSlice";
+import { checkUserAuth,getUserInfo } from "../../services/slices/getUserDataSlice";
 import IngredientPage from "../../pages/IngredientPage/IngredientPage";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import OrderInfo from "../OrderInfo/OrderInfo";
@@ -25,7 +25,6 @@ function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-
   const background = location.state && location.state.background;
 
   const closeModal = () => {
@@ -34,7 +33,7 @@ function App() {
   useEffect(() => {
     dispatch(getIngredients());
     dispatch(checkUserAuth());
-  }, []);
+   }, []);
 
   return (
     <div className={`${styles.page} text text_type_main-default`}>

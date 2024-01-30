@@ -18,8 +18,8 @@ const initialState: IngredientsState = {
 };
 
 export const getIngredients = createAsyncThunk(
-  "ingredients/getAllWells",
-  async () => {
+  "ingredients/getAll",
+  async function (_) {
     const response = await getIngredientsApi();
     return response;
   },

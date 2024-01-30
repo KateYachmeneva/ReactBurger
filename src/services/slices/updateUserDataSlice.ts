@@ -61,3 +61,4 @@ export const updateUserDataSlice = createSlice({
 });
 
 export default updateUserDataSlice.reducer;
+export const { authChecked } = updateUserDataSlice.actions;

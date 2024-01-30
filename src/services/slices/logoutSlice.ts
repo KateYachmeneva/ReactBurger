@@ -10,7 +10,7 @@ interface ILogoutSlice {
   error: null | unknown;
 }
 
-const initialState: ILogoutSlice = {
+export const initialState: ILogoutSlice = {
   logoutRequest: false,
   logoutSuccess: false,
   logoutError: false,

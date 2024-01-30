@@ -1,7 +1,7 @@
 export function getCookie(
   name: "refreshToken" | "authToken",
 ): string | undefined {
-  let matches = document.cookie.match(
+  const matches = document.cookie.match(
     new RegExp(
       "(?:^|; )" +
         name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
@@ -10,7 +10,6 @@ export function getCookie(
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
-
 export function setCookie(
   name: string,
   value: string,
